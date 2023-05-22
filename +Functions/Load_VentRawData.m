@@ -1,5 +1,5 @@
 
-function [Ventilation] = LoadReadData_VentDataList(MainInput)
+function [Ventilation] = Load_VentRawData(MainInput)
 % Initialize output variables
 Ventilation.Image = [];
 Ventilation.filename = [];
@@ -48,14 +48,14 @@ elseif strcmp(MainInput.XeDataext,'.data') == 1
     if strcmp(MainInput.ScannerSoftware, '5.3.1') == 1 ...
             || strcmp(MainInput.ScannerSoftware, '5.6.1') == 1
         [Image, file_folder, file_name] = ...
-            LoadData.LoadData_Gas_VentDiff_Philips_GRE(MainInput.XeDataLocation);
+            Functions.LoadData_ListData(MainInput.XeDataLocation,MainInput.ImageSize);
         Ventilation.Image = Image;
         Ventilation.filename = file_name;
         Ventilation.folder = file_folder;     
 
     elseif strcmp(MainInput.ScannerSoftware, '5.9.0') == 1                
         [Image, file_folder, file_name] = ...
-            LoadData.LoadData_Gas_VentDiff_Philips_GRE_R590(MainInput.XeDataLocation);
+            Functions.LoadData_ListData_R590(MainInput.XeDataLocation,MainInput.ImageSize);
         Ventilation.Image = Image;
         Ventilation.filename = file_name;
         Ventilation.folder = file_folder;          

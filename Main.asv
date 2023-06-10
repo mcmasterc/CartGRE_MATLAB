@@ -24,7 +24,7 @@
 ImgOrientation = 'Axial';
 MainInput.ScannerSoftware = '5.9.0';
 
-[filename, path] = uigetfile('\\rds6.cchmc.org\PulMed-43\CPIR_Share\Carter\*.*','Select .data file for the cartesian ventilation'); 
+[filename, path] = uigetfile('*.*','Select .data file for the cartesian ventilation'); 
 MainInput.XeFullPath = [path,filename];
 MainInput.XeDataLocation = path(1:end-1);
 [~,~,xe_ext] = fileparts([path, filename]);

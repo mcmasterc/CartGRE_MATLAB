@@ -45,22 +45,13 @@ elseif strcmp(MainInput.XeDataext,'.nii') == 1 || strcmp(MainInput.XeDataext,'.g
         Ventilation.folder = file_folder;       
     
 elseif strcmp(MainInput.XeDataext,'.data') == 1  
-    if strcmp(MainInput.ScannerSoftware, '5.3.1') == 1 ...
-            || strcmp(MainInput.ScannerSoftware, '5.6.1') == 1
-        [Image, file_folder, file_name] = ...
-            Functions.LoadData_ListData(MainInput.XeDataLocation,MainInput.ImageSize);
-        Ventilation.Image = Image;
-        Ventilation.filename = file_name;
-        Ventilation.folder = file_folder;     
-
-    elseif strcmp(MainInput.ScannerSoftware, '5.9.0') == 1                
+               
         [Image, file_folder, file_name] = ...
             Functions.LoadData_ListData_R590(MainInput.XeDataLocation,MainInput.ImageSize);
         Ventilation.Image = Image;
         Ventilation.filename = file_name;
         Ventilation.folder = file_folder;          
-                
-    end
+               
 %--------------------- add new read load function here --------------------
 % elseif strcmp(MainInput.XeDataType,'add DataType') == 1
 %     if strcmp(MainInput.AnalysisType,'Ventilation') == 1                 

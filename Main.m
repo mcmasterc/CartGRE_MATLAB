@@ -20,8 +20,7 @@
 % folder, as a centralized spot for sharing and storing the bulk data.
 %
 % 
-%ImgOrientation = 'Coronal'; % just choose coronal or axial by commenting/uncommenting
-ImgOrientation = 'Axial';
+
 MainInput.ScannerSoftware = '5.9.0';
 
 [filename, path] = uigetfile('\\rds6.cchmc.org\PulMed-43\CPIR_Share\Carter\*.*','Select .data file for the cartesian ventilation'); 
@@ -30,7 +29,7 @@ MainInput.XeDataLocation = path(1:end-1);
 [~,~,xe_ext] = fileparts([path, filename]);
 MainInput.XeFileName = filename;
 MainInput.XeDataext = xe_ext;
-MainInput.ImgOrientation = ImgOrientation;
+
 
 
 %% Step 2: feed the filename into the load data function. 
@@ -47,7 +46,17 @@ MainInput.ImgOrientation = ImgOrientation;
 % subject. 
 %
 
-MainInput.ImageSize = [128, 128];
+%ImgOrientation = 'Coronal'; % just choose coronal or axial by commenting/uncommenting
+ImgOrientation = 'Coronal';
+
+subject_id = '20230306_IRC740H-046c';
+Fourier_sz = [144,144,12];
+recon_sz = [144,144,12];
+
+MainInput.ImgOrientation = ImgOrientation;
+MainInput.subject_id = subject_id;
+MainInput.Fourier_sz = Fourier_sz;
+MainInput.recon_sz = recon_sz;
 
 Ventilation = Functions.Load_VentRawData(MainInput);
 orthosliceViewer(Ventilation.Image);
@@ -63,4 +72,4 @@ nii.img = rot90(flipud(nii.img),-1);
 
 temp_hdr = nii_tool('hdr',[parentPath, parentFile]);
 nii.hdr = temp_hdr;
-nii_tool('save',nii,[path,'img_ventilation_reconstruction.nii.gz'])
+nii_tool('save',nii,[path,'img_ventilation_reconstruction_v4.nii.gz'])

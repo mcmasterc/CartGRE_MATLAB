@@ -31,7 +31,7 @@ elseif strcmp(MainInput.XeDataext,'.nii') == 1 || strcmp(MainInput.XeDataext,'.g
         file_folder = MainInput.XeDataLocation;
         A1 = LoadData.load_nii(MainInput.XeFullPath); % Original
         A=A1.img;
-        if strcmp(MainInput.ImgOrientation,'Coronal') == 1
+        if contains(MainInput.ImgOrientation,'Coron','IgnoreCase',true) == 1
             gzfile_coronal = [3 1 2];
             A=permute(A,gzfile_coronal);
             A=rot90(A,2); 
@@ -47,7 +47,7 @@ elseif strcmp(MainInput.XeDataext,'.nii') == 1 || strcmp(MainInput.XeDataext,'.g
 elseif strcmp(MainInput.XeDataext,'.data') == 1  
                
         [Image, file_folder, file_name] = ...
-            Functions.LoadData_ListData_R590(MainInput.XeDataLocation,MainInput.ImageSize);
+            Functions.LoadData_ListData_R590(MainInput.XeDataLocation,MainInput.Fourier_sz,MainInput.recon_sz);
         Ventilation.Image = Image;
         Ventilation.filename = file_name;
         Ventilation.folder = file_folder;          

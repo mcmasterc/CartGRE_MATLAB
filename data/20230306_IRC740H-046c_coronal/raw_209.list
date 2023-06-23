@@ -1,0 +1,1167 @@
+# === DATA DESCRIPTION FILE ======================================================
+#
+# CAUTION - Investigational device.
+# Limited by Federal Law to investigational use.
+#
+# Scan name   : RawExp - CPIR_Vent_2D_Cor
+# Dataset name: RAW_209
+#
+# Gyroscan SW release            : 5.9-0
+# Reconstruction Host SW Version :   3
+# Reconstruction   AP SW Version :   3
+#
+# === GENERAL INFORMATION ========================================================
+#
+# n.a. n.a. n.a.  number of ...                        value
+# ---- ---- ----  ----------------------------------   -----
+.    0    0    0  number_of_mixes                    :     1
+#
+# mix  n.a. n.a.  number of ...                        value
+# ---- ---- ----  ----------------------------------   -----
+.    0    0    0  number_of_encoding_dimensions      :     2
+.    0    0    0  number_of_dynamic_scans            :     1
+.    0    0    0  number_of_cardiac_phases           :     1
+.    0    0    0  number_of_echoes                   :     1
+.    0    0    0  number_of_locations                :    12
+.    0    0    0  number_of_extra_attribute_1_values :     1
+.    0    0    0  number_of_extra_attribute_2_values :     1
+.    0    0    0  number_of_signal_averages          :     1
+#
+# mix  echo n.a.  k-space coordinate ranges            start  end
+# ---- ---- ----  ----------------------------------   -----  -----
+.    0    0    0  kx_range                           :  -168    671
+.    0    0    0  ky_range                           :   -41     41
+#
+# mix  echo n.a.  k-space oversample factors           value
+# ---- ---- ----  ----------------------------------   ---------
+.    0    0    0  kx_oversample_factor               :   16.0000
+.    0    0    0  ky_oversample_factor               :    1.0000
+#
+# mix  echo n.a.  number of ...                        value
+# ---- ---- ----  ----------------------------------   -----
+.    0    0    0  number_of_gradient_echoes          :   588
+.    0    0    0  number_of_rf_echoes                :   267
+#
+# mix  n.a. n.a.  reconstruction matrix                value
+# ---- ---- ----  ----------------------------------   -----
+.    0    0    0  X-resolution                       :   144
+.    0    0    0  Y-resolution                       :   144
+#
+# mix  echo loca  imaging space coordinate ranges      start  end
+# ---- ---- ----  ----------------------------------   -----  -----
+.    0    0    0  X_range                            :   -78     77
+.    0    0    0  Y_range                            :  -144     -1
+.    0    0    1  X_range                            :   -78     77
+.    0    0    1  Y_range                            :  -144     -1
+.    0    0    2  X_range                            :   -78     77
+.    0    0    2  Y_range                            :  -144     -1
+.    0    0    3  X_range                            :   -78     77
+.    0    0    3  Y_range                            :  -144     -1
+.    0    0    4  X_range                            :   -78     77
+.    0    0    4  Y_range                            :  -144     -1
+.    0    0    5  X_range                            :   -78     77
+.    0    0    5  Y_range                            :  -144     -1
+.    0    0    6  X_range                            :   -78     77
+.    0    0    6  Y_range                            :  -144     -1
+.    0    0    7  X_range                            :   -78     77
+.    0    0    7  Y_range                            :  -144     -1
+.    0    0    8  X_range                            :   -78     77
+.    0    0    8  Y_range                            :  -144     -1
+.    0    0    9  X_range                            :   -78     77
+.    0    0    9  Y_range                            :  -144     -1
+.    0    0   10  X_range                            :   -78     77
+.    0    0   10  Y_range                            :  -144     -1
+.    0    0   11  X_range                            :   -78     77
+.    0    0   11  Y_range                            :  -144     -1
+#
+# Complex data vector types:
+# --------------------------
+# STD = Standard data vector (image data or spectroscopy data)
+# REJ = Rejected standard data vector
+#       (only for scans with arrhythmia rejection)
+# PHX = Correction data vector for EPI/GraSE phase correction
+# FRX = Correction data vector for frequency spectrum correction
+# NOI = Preparation phase data vector for noise determination
+# NAV = Phase navigator data vector
+# DNA = Dynamic phase navigator vector
+#
+# Other attributes of complex data vectors:
+# -----------------------------------------
+# mix      = mixed sequence number
+# dyn      = dynamic scan number
+# card     = cardiac phase number
+# echo     = echo number
+# loca     = location number
+# chan     = synco channel number
+# extr1    = extra attribute 1 (semantics depend on type of scan)
+# extr2    = extra attribute 2 (   ''       ''   ''  ''  ''  '' )
+# ky,kz    = k-space coordinates in 1st and 2nd preparation direction (image data)
+# kx,ky,kz = k-space coordinates in 1st, 2nd and 3rd preparation direction (spectroscopy data)
+# aver     = sequence number of this signal average
+# sign     = sign of measurement gradient used for this data vector (1 = positive, -1 = negative)
+# rf       = sequence number of this rf echo (only for TSE, TFE, GraSE)
+# grad     = sequence number of this gradient echo (only for EPI/GraSE)
+# enc      = encoding time (only for EPI/GraSE)
+# rtop     = R-top offset in ms
+# rr       = RR-interval length in ms
+# size   = data vector size   in number of bytes (1 complex element = 2 floats = 8 bytes)
+# offset = data vector offset in number of bytes (first data vector starts at offset 0)
+#
+# The complex data vectors are represented as binary data in little endian single precision IEEE float format.
+#
+# Please note that complex data vector attributes which are not relevant for a certain type of vector
+# may have arbitrary values!
+#
+# Fourier transformations:
+# ------------------------
+# The Fourier transformation lengths for STD, NAV and REJ data are (by definition) equal to
+# to reconstruction matrix length * k-space oversample sample factor
+# in each applicable direction.
+#
+# The centre point of the k-space must be positioned in the middle of the interval with this length,
+# (or just right from the middle if the Fourier transformation length is even), according to the
+# specified k-space coordinate ranges. Apply a cyclic wrap-around to data that extends outside the
+# interval, and zerofill missing data before Fourier transformation.
+# After Fourier transformation, the imaging space coordinate ranges specify the position, length 
+# and direction of the relevant part of the frequency spectrum. Apply a cyclic wrap-around if
+# needed. If start value > end value, read the spectrum part between these positions in reverse order.
+#
+# Corrections:
+# ------------
+# Depending on the type of scan, one or more of the following corrections may have to be applied:
+# - frequency spectrum correction (using FRX data)
+# - EPI/GraSE phase correction    (using PHX data)
+# - rf echo amplitude correction  (using PHX data, only for GraSE scans)
+# 
+# These corrections can be applied to STD, NAV and REJ data vectors after forward Fourier transformation
+# in the measurement direction, by multiplying the selected part of the frequency spectrum of
+# these data vectors with the PHX and FRX correction data vector that has corresponding identifying
+# complex data vector attributes.
+# 
+# Remarks:
+# - In GraSE scans you may get a PHX correction data vector for each rf echo. These correction vectors
+#   differ only a scale factor from each other, and can be used for rf echo amplitude correction.
+#   If you don't want this correction, use the correction data vectors with rf echo = 0 only.
+# - Depending on the type of scan, several of the FRX correction data vectors may be identical.
+#
+# Identifying attributes of complex data vectors:
+# -----------------------------------------------
+# The next table specifies the identifying attributes for each type of complex data vector:
+#
+# typ mix   dyn   card  echo  loca  chan  extr1 extr2 ky    kz    n.a.  aver  sign  rf    grad  enc   rtop  rr    size   offset
+# --- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ------ ------
+#
+# STD   *     *     *     *     *     *     *     *     *     *           *     *     *     *
+# REJ   *     *     *     *     *     *     *     *     *     *           *     *     *     *
+# PHX   *                 *     *     *                                         *     *     *
+# FRX   *                 *     *     *                                         *            
+# NOI                           *     *                                                      
+# NAV   *     *     *     *     *     *     *     *     *     *           *     *     *     *
+# DNA         *                       *                                         *           *
+#
+# === START OF DATA VECTOR INDEX =================================================
+#
+# typ mix   dyn   card  echo  loca  chan  extr1 extr2 ky    kz    n.a.  aver  sign  rf    grad  enc   rtop  rr    size   offset
+# --- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ------ ------
+#
+  NOI     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0 154560 0
+  STD     0     0     0     0     0     0     0     0    41     0     0     0     1     0     0     0     0     0   6720 154560
+  STD     0     0     0     0     0     0     0     0    40     0     0     0     1     0     0     0     0     0   6720 161280
+  STD     0     0     0     0     0     0     0     0    39     0     0     0     1     0     0     0     0     0   6720 168000
+  STD     0     0     0     0     0     0     0     0    38     0     0     0     1     0     0     0     0     0   6720 174720
+  STD     0     0     0     0     0     0     0     0    37     0     0     0     1     0     0     0     0     0   6720 181440
+  STD     0     0     0     0     0     0     0     0    36     0     0     0     1     0     0     0     0     0   6720 188160
+  STD     0     0     0     0     0     0     0     0    35     0     0     0     1     0     0     0     0     0   6720 194880
+  STD     0     0     0     0     0     0     0     0    34     0     0     0     1     0     0     0     0     0   6720 201600
+  STD     0     0     0     0     0     0     0     0    33     0     0     0     1     0     0     0     0     0   6720 208320
+  STD     0     0     0     0     0     0     0     0    32     0     0     0     1     0     0     0     0     0   6720 215040
+  STD     0     0     0     0     0     0     0     0    31     0     0     0     1     0     0     0     0     0   6720 221760
+  STD     0     0     0     0     0     0     0     0    30     0     0     0     1     0     0     0     0     0   6720 228480
+  STD     0     0     0     0     0     0     0     0    29     0     0     0     1     0     0     0     0     0   6720 235200
+  STD     0     0     0     0     0     0     0     0    28     0     0     0     1     0     0     0     0     0   6720 241920
+  STD     0     0     0     0     0     0     0     0    27     0     0     0     1     0     0     0     0     0   6720 248640
+  STD     0     0     0     0     0     0     0     0    26     0     0     0     1     0     0     0     0     0   6720 255360
+  STD     0     0     0     0     0     0     0     0    25     0     0     0     1     0     0     0     0     0   6720 262080
+  STD     0     0     0     0     0     0     0     0    24     0     0     0     1     0     0     0     0     0   6720 268800
+  STD     0     0     0     0     0     0     0     0    23     0     0     0     1     0     0     0     0     0   6720 275520
+  STD     0     0     0     0     0     0     0     0    22     0     0     0     1     0     0     0     0     0   6720 282240
+  STD     0     0     0     0     0     0     0     0    21     0     0     0     1     0     0     0     0     0   6720 288960
+  STD     0     0     0     0     0     0     0     0    20     0     0     0     1     0     0     0     0     0   6720 295680
+  STD     0     0     0     0     0     0     0     0    19     0     0     0     1     0     0     0     0     0   6720 302400
+  STD     0     0     0     0     0     0     0     0    18     0     0     0     1     0     0     0     0     0   6720 309120
+  STD     0     0     0     0     0     0     0     0    17     0     0     0     1     0     0     0     0     0   6720 315840
+  STD     0     0     0     0     0     0     0     0    16     0     0     0     1     0     0     0     0     0   6720 322560
+  STD     0     0     0     0     0     0     0     0    15     0     0     0     1     0     0     0     0     0   6720 329280
+  STD     0     0     0     0     0     0     0     0    14     0     0     0     1     0     0     0     0     0   6720 336000
+  STD     0     0     0     0     0     0     0     0    13     0     0     0     1     0     0     0     0     0   6720 342720
+  STD     0     0     0     0     0     0     0     0    12     0     0     0     1     0     0     0     0     0   6720 349440
+  STD     0     0     0     0     0     0     0     0    11     0     0     0     1     0     0     0     0     0   6720 356160
+  STD     0     0     0     0     0     0     0     0    10     0     0     0     1     0     0     0     0     0   6720 362880
+  STD     0     0     0     0     0     0     0     0     9     0     0     0     1     0     0     0     0     0   6720 369600
+  STD     0     0     0     0     0     0     0     0     8     0     0     0     1     0     0     0     0     0   6720 376320
+  STD     0     0     0     0     0     0     0     0     7     0     0     0     1     0     0     0     0     0   6720 383040
+  STD     0     0     0     0     0     0     0     0     6     0     0     0     1     0     0     0     0     0   6720 389760
+  STD     0     0     0     0     0     0     0     0     5     0     0     0     1     0     0     0     0     0   6720 396480
+  STD     0     0     0     0     0     0     0     0     4     0     0     0     1     0     0     0     0     0   6720 403200
+  STD     0     0     0     0     0     0     0     0     3     0     0     0     1     0     0     0     0     0   6720 409920
+  STD     0     0     0     0     0     0     0     0     2     0     0     0     1     0     0     0     0     0   6720 416640
+  STD     0     0     0     0     0     0     0     0     1     0     0     0     1     0     0     0     0     0   6720 423360
+  STD     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0   6720 430080
+  STD     0     0     0     0     0     0     0     0    -1     0     0     0     1     0     0     0     0     0   6720 436800
+  STD     0     0     0     0     0     0     0     0    -2     0     0     0     1     0     0     0     0     0   6720 443520
+  STD     0     0     0     0     0     0     0     0    -3     0     0     0     1     0     0     0     0     0   6720 450240
+  STD     0     0     0     0     0     0     0     0    -4     0     0     0     1     0     0     0     0     0   6720 456960
+  STD     0     0     0     0     0     0     0     0    -5     0     0     0     1     0     0     0     0     0   6720 463680
+  STD     0     0     0     0     0     0     0     0    -6     0     0     0     1     0     0     0     0     0   6720 470400
+  STD     0     0     0     0     0     0     0     0    -7     0     0     0     1     0     0     0     0     0   6720 477120
+  STD     0     0     0     0     0     0     0     0    -8     0     0     0     1     0     0     0     0     0   6720 483840
+  STD     0     0     0     0     0     0     0     0    -9     0     0     0     1     0     0     0     0     0   6720 490560
+  STD     0     0     0     0     0     0     0     0   -10     0     0     0     1     0     0     0     0     0   6720 497280
+  STD     0     0     0     0     0     0     0     0   -11     0     0     0     1     0     0     0     0     0   6720 504000
+  STD     0     0     0     0     0     0     0     0   -12     0     0     0     1     0     0     0     0     0   6720 510720
+  STD     0     0     0     0     0     0     0     0   -13     0     0     0     1     0     0     0     0     0   6720 517440
+  STD     0     0     0     0     0     0     0     0   -14     0     0     0     1     0     0     0     0     0   6720 524160
+  STD     0     0     0     0     0     0     0     0   -15     0     0     0     1     0     0     0     0     0   6720 530880
+  STD     0     0     0     0     0     0     0     0   -16     0     0     0     1     0     0     0     0     0   6720 537600
+  STD     0     0     0     0     0     0     0     0   -17     0     0     0     1     0     0     0     0     0   6720 544320
+  STD     0     0     0     0     0     0     0     0   -18     0     0     0     1     0     0     0     0     0   6720 551040
+  STD     0     0     0     0     0     0     0     0   -19     0     0     0     1     0     0     0     0     0   6720 557760
+  STD     0     0     0     0     0     0     0     0   -20     0     0     0     1     0     0     0     0     0   6720 564480
+  STD     0     0     0     0     0     0     0     0   -21     0     0     0     1     0     0     0     0     0   6720 571200
+  STD     0     0     0     0     0     0     0     0   -22     0     0     0     1     0     0     0     0     0   6720 577920
+  STD     0     0     0     0     0     0     0     0   -23     0     0     0     1     0     0     0     0     0   6720 584640
+  STD     0     0     0     0     0     0     0     0   -24     0     0     0     1     0     0     0     0     0   6720 591360
+  STD     0     0     0     0     0     0     0     0   -25     0     0     0     1     0     0     0     0     0   6720 598080
+  STD     0     0     0     0     0     0     0     0   -26     0     0     0     1     0     0     0     0     0   6720 604800
+  STD     0     0     0     0     0     0     0     0   -27     0     0     0     1     0     0     0     0     0   6720 611520
+  STD     0     0     0     0     0     0     0     0   -28     0     0     0     1     0     0     0     0     0   6720 618240
+  STD     0     0     0     0     0     0     0     0   -29     0     0     0     1     0     0     0     0     0   6720 624960
+  STD     0     0     0     0     0     0     0     0   -30     0     0     0     1     0     0     0     0     0   6720 631680
+  STD     0     0     0     0     0     0     0     0   -31     0     0     0     1     0     0     0     0     0   6720 638400
+  STD     0     0     0     0     0     0     0     0   -32     0     0     0     1     0     0     0     0     0   6720 645120
+  STD     0     0     0     0     0     0     0     0   -33     0     0     0     1     0     0     0     0     0   6720 651840
+  STD     0     0     0     0     0     0     0     0   -34     0     0     0     1     0     0     0     0     0   6720 658560
+  STD     0     0     0     0     0     0     0     0   -35     0     0     0     1     0     0     0     0     0   6720 665280
+  STD     0     0     0     0     0     0     0     0   -36     0     0     0     1     0     0     0     0     0   6720 672000
+  STD     0     0     0     0     0     0     0     0   -37     0     0     0     1     0     0     0     0     0   6720 678720
+  STD     0     0     0     0     0     0     0     0   -38     0     0     0     1     0     0     0     0     0   6720 685440
+  STD     0     0     0     0     0     0     0     0   -39     0     0     0     1     0     0     0     0     0   6720 692160
+  STD     0     0     0     0     0     0     0     0   -40     0     0     0     1     0     0     0     0     0   6720 698880
+  STD     0     0     0     0     0     0     0     0   -41     0     0     0     1     0     0     0     0     0   6720 705600
+  STD     0     0     0     0     1     0     0     0    41     0     0     0     1     0     0     0     0     0   6720 712320
+  STD     0     0     0     0     1     0     0     0    40     0     0     0     1     0     0     0     0     0   6720 719040
+  STD     0     0     0     0     1     0     0     0    39     0     0     0     1     0     0     0     0     0   6720 725760
+  STD     0     0     0     0     1     0     0     0    38     0     0     0     1     0     0     0     0     0   6720 732480
+  STD     0     0     0     0     1     0     0     0    37     0     0     0     1     0     0     0     0     0   6720 739200
+  STD     0     0     0     0     1     0     0     0    36     0     0     0     1     0     0     0     0     0   6720 745920
+  STD     0     0     0     0     1     0     0     0    35     0     0     0     1     0     0     0     0     0   6720 752640
+  STD     0     0     0     0     1     0     0     0    34     0     0     0     1     0     0     0     0     0   6720 759360
+  STD     0     0     0     0     1     0     0     0    33     0     0     0     1     0     0     0     0     0   6720 766080
+  STD     0     0     0     0     1     0     0     0    32     0     0     0     1     0     0     0     0     0   6720 772800
+  STD     0     0     0     0     1     0     0     0    31     0     0     0     1     0     0     0     0     0   6720 779520
+  STD     0     0     0     0     1     0     0     0    30     0     0     0     1     0     0     0     0     0   6720 786240
+  STD     0     0     0     0     1     0     0     0    29     0     0     0     1     0     0     0     0     0   6720 792960
+  STD     0     0     0     0     1     0     0     0    28     0     0     0     1     0     0     0     0     0   6720 799680
+  STD     0     0     0     0     1     0     0     0    27     0     0     0     1     0     0     0     0     0   6720 806400
+  STD     0     0     0     0     1     0     0     0    26     0     0     0     1     0     0     0     0     0   6720 813120
+  STD     0     0     0     0     1     0     0     0    25     0     0     0     1     0     0     0     0     0   6720 819840
+  STD     0     0     0     0     1     0     0     0    24     0     0     0     1     0     0     0     0     0   6720 826560
+  STD     0     0     0     0     1     0     0     0    23     0     0     0     1     0     0     0     0     0   6720 833280
+  STD     0     0     0     0     1     0     0     0    22     0     0     0     1     0     0     0     0     0   6720 840000
+  STD     0     0     0     0     1     0     0     0    21     0     0     0     1     0     0     0     0     0   6720 846720
+  STD     0     0     0     0     1     0     0     0    20     0     0     0     1     0     0     0     0     0   6720 853440
+  STD     0     0     0     0     1     0     0     0    19     0     0     0     1     0     0     0     0     0   6720 860160
+  STD     0     0     0     0     1     0     0     0    18     0     0     0     1     0     0     0     0     0   6720 866880
+  STD     0     0     0     0     1     0     0     0    17     0     0     0     1     0     0     0     0     0   6720 873600
+  STD     0     0     0     0     1     0     0     0    16     0     0     0     1     0     0     0     0     0   6720 880320
+  STD     0     0     0     0     1     0     0     0    15     0     0     0     1     0     0     0     0     0   6720 887040
+  STD     0     0     0     0     1     0     0     0    14     0     0     0     1     0     0     0     0     0   6720 893760
+  STD     0     0     0     0     1     0     0     0    13     0     0     0     1     0     0     0     0     0   6720 900480
+  STD     0     0     0     0     1     0     0     0    12     0     0     0     1     0     0     0     0     0   6720 907200
+  STD     0     0     0     0     1     0     0     0    11     0     0     0     1     0     0     0     0     0   6720 913920
+  STD     0     0     0     0     1     0     0     0    10     0     0     0     1     0     0     0     0     0   6720 920640
+  STD     0     0     0     0     1     0     0     0     9     0     0     0     1     0     0     0     0     0   6720 927360
+  STD     0     0     0     0     1     0     0     0     8     0     0     0     1     0     0     0     0     0   6720 934080
+  STD     0     0     0     0     1     0     0     0     7     0     0     0     1     0     0     0     0     0   6720 940800
+  STD     0     0     0     0     1     0     0     0     6     0     0     0     1     0     0     0     0     0   6720 947520
+  STD     0     0     0     0     1     0     0     0     5     0     0     0     1     0     0     0     0     0   6720 954240
+  STD     0     0     0     0     1     0     0     0     4     0     0     0     1     0     0     0     0     0   6720 960960
+  STD     0     0     0     0     1     0     0     0     3     0     0     0     1     0     0     0     0     0   6720 967680
+  STD     0     0     0     0     1     0     0     0     2     0     0     0     1     0     0     0     0     0   6720 974400
+  STD     0     0     0     0     1     0     0     0     1     0     0     0     1     0     0     0     0     0   6720 981120
+  STD     0     0     0     0     1     0     0     0     0     0     0     0     1     0     0     0     0     0   6720 987840
+  STD     0     0     0     0     1     0     0     0    -1     0     0     0     1     0     0     0     0     0   6720 994560
+  STD     0     0     0     0     1     0     0     0    -2     0     0     0     1     0     0     0     0     0   6720 1001280
+  STD     0     0     0     0     1     0     0     0    -3     0     0     0     1     0     0     0     0     0   6720 1008000
+  STD     0     0     0     0     1     0     0     0    -4     0     0     0     1     0     0     0     0     0   6720 1014720
+  STD     0     0     0     0     1     0     0     0    -5     0     0     0     1     0     0     0     0     0   6720 1021440
+  STD     0     0     0     0     1     0     0     0    -6     0     0     0     1     0     0     0     0     0   6720 1028160
+  STD     0     0     0     0     1     0     0     0    -7     0     0     0     1     0     0     0     0     0   6720 1034880
+  STD     0     0     0     0     1     0     0     0    -8     0     0     0     1     0     0     0     0     0   6720 1041600
+  STD     0     0     0     0     1     0     0     0    -9     0     0     0     1     0     0     0     0     0   6720 1048320
+  STD     0     0     0     0     1     0     0     0   -10     0     0     0     1     0     0     0     0     0   6720 1055040
+  STD     0     0     0     0     1     0     0     0   -11     0     0     0     1     0     0     0     0     0   6720 1061760
+  STD     0     0     0     0     1     0     0     0   -12     0     0     0     1     0     0     0     0     0   6720 1068480
+  STD     0     0     0     0     1     0     0     0   -13     0     0     0     1     0     0     0     0     0   6720 1075200
+  STD     0     0     0     0     1     0     0     0   -14     0     0     0     1     0     0     0     0     0   6720 1081920
+  STD     0     0     0     0     1     0     0     0   -15     0     0     0     1     0     0     0     0     0   6720 1088640
+  STD     0     0     0     0     1     0     0     0   -16     0     0     0     1     0     0     0     0     0   6720 1095360
+  STD     0     0     0     0     1     0     0     0   -17     0     0     0     1     0     0     0     0     0   6720 1102080
+  STD     0     0     0     0     1     0     0     0   -18     0     0     0     1     0     0     0     0     0   6720 1108800
+  STD     0     0     0     0     1     0     0     0   -19     0     0     0     1     0     0     0     0     0   6720 1115520
+  STD     0     0     0     0     1     0     0     0   -20     0     0     0     1     0     0     0     0     0   6720 1122240
+  STD     0     0     0     0     1     0     0     0   -21     0     0     0     1     0     0     0     0     0   6720 1128960
+  STD     0     0     0     0     1     0     0     0   -22     0     0     0     1     0     0     0     0     0   6720 1135680
+  STD     0     0     0     0     1     0     0     0   -23     0     0     0     1     0     0     0     0     0   6720 1142400
+  STD     0     0     0     0     1     0     0     0   -24     0     0     0     1     0     0     0     0     0   6720 1149120
+  STD     0     0     0     0     1     0     0     0   -25     0     0     0     1     0     0     0     0     0   6720 1155840
+  STD     0     0     0     0     1     0     0     0   -26     0     0     0     1     0     0     0     0     0   6720 1162560
+  STD     0     0     0     0     1     0     0     0   -27     0     0     0     1     0     0     0     0     0   6720 1169280
+  STD     0     0     0     0     1     0     0     0   -28     0     0     0     1     0     0     0     0     0   6720 1176000
+  STD     0     0     0     0     1     0     0     0   -29     0     0     0     1     0     0     0     0     0   6720 1182720
+  STD     0     0     0     0     1     0     0     0   -30     0     0     0     1     0     0     0     0     0   6720 1189440
+  STD     0     0     0     0     1     0     0     0   -31     0     0     0     1     0     0     0     0     0   6720 1196160
+  STD     0     0     0     0     1     0     0     0   -32     0     0     0     1     0     0     0     0     0   6720 1202880
+  STD     0     0     0     0     1     0     0     0   -33     0     0     0     1     0     0     0     0     0   6720 1209600
+  STD     0     0     0     0     1     0     0     0   -34     0     0     0     1     0     0     0     0     0   6720 1216320
+  STD     0     0     0     0     1     0     0     0   -35     0     0     0     1     0     0     0     0     0   6720 1223040
+  STD     0     0     0     0     1     0     0     0   -36     0     0     0     1     0     0     0     0     0   6720 1229760
+  STD     0     0     0     0     1     0     0     0   -37     0     0     0     1     0     0     0     0     0   6720 1236480
+  STD     0     0     0     0     1     0     0     0   -38     0     0     0     1     0     0     0     0     0   6720 1243200
+  STD     0     0     0     0     1     0     0     0   -39     0     0     0     1     0     0     0     0     0   6720 1249920
+  STD     0     0     0     0     1     0     0     0   -40     0     0     0     1     0     0     0     0     0   6720 1256640
+  STD     0     0     0     0     1     0     0     0   -41     0     0     0     1     0     0     0     0     0   6720 1263360
+  STD     0     0     0     0     2     0     0     0    41     0     0     0     1     0     0     0     0     0   6720 1270080
+  STD     0     0     0     0     2     0     0     0    40     0     0     0     1     0     0     0     0     0   6720 1276800
+  STD     0     0     0     0     2     0     0     0    39     0     0     0     1     0     0     0     0     0   6720 1283520
+  STD     0     0     0     0     2     0     0     0    38     0     0     0     1     0     0     0     0     0   6720 1290240
+  STD     0     0     0     0     2     0     0     0    37     0     0     0     1     0     0     0     0     0   6720 1296960
+  STD     0     0     0     0     2     0     0     0    36     0     0     0     1     0     0     0     0     0   6720 1303680
+  STD     0     0     0     0     2     0     0     0    35     0     0     0     1     0     0     0     0     0   6720 1310400
+  STD     0     0     0     0     2     0     0     0    34     0     0     0     1     0     0     0     0     0   6720 1317120
+  STD     0     0     0     0     2     0     0     0    33     0     0     0     1     0     0     0     0     0   6720 1323840
+  STD     0     0     0     0     2     0     0     0    32     0     0     0     1     0     0     0     0     0   6720 1330560
+  STD     0     0     0     0     2     0     0     0    31     0     0     0     1     0     0     0     0     0   6720 1337280
+  STD     0     0     0     0     2     0     0     0    30     0     0     0     1     0     0     0     0     0   6720 1344000
+  STD     0     0     0     0     2     0     0     0    29     0     0     0     1     0     0     0     0     0   6720 1350720
+  STD     0     0     0     0     2     0     0     0    28     0     0     0     1     0     0     0     0     0   6720 1357440
+  STD     0     0     0     0     2     0     0     0    27     0     0     0     1     0     0     0     0     0   6720 1364160
+  STD     0     0     0     0     2     0     0     0    26     0     0     0     1     0     0     0     0     0   6720 1370880
+  STD     0     0     0     0     2     0     0     0    25     0     0     0     1     0     0     0     0     0   6720 1377600
+  STD     0     0     0     0     2     0     0     0    24     0     0     0     1     0     0     0     0     0   6720 1384320
+  STD     0     0     0     0     2     0     0     0    23     0     0     0     1     0     0     0     0     0   6720 1391040
+  STD     0     0     0     0     2     0     0     0    22     0     0     0     1     0     0     0     0     0   6720 1397760
+  STD     0     0     0     0     2     0     0     0    21     0     0     0     1     0     0     0     0     0   6720 1404480
+  STD     0     0     0     0     2     0     0     0    20     0     0     0     1     0     0     0     0     0   6720 1411200
+  STD     0     0     0     0     2     0     0     0    19     0     0     0     1     0     0     0     0     0   6720 1417920
+  STD     0     0     0     0     2     0     0     0    18     0     0     0     1     0     0     0     0     0   6720 1424640
+  STD     0     0     0     0     2     0     0     0    17     0     0     0     1     0     0     0     0     0   6720 1431360
+  STD     0     0     0     0     2     0     0     0    16     0     0     0     1     0     0     0     0     0   6720 1438080
+  STD     0     0     0     0     2     0     0     0    15     0     0     0     1     0     0     0     0     0   6720 1444800
+  STD     0     0     0     0     2     0     0     0    14     0     0     0     1     0     0     0     0     0   6720 1451520
+  STD     0     0     0     0     2     0     0     0    13     0     0     0     1     0     0     0     0     0   6720 1458240
+  STD     0     0     0     0     2     0     0     0    12     0     0     0     1     0     0     0     0     0   6720 1464960
+  STD     0     0     0     0     2     0     0     0    11     0     0     0     1     0     0     0     0     0   6720 1471680
+  STD     0     0     0     0     2     0     0     0    10     0     0     0     1     0     0     0     0     0   6720 1478400
+  STD     0     0     0     0     2     0     0     0     9     0     0     0     1     0     0     0     0     0   6720 1485120
+  STD     0     0     0     0     2     0     0     0     8     0     0     0     1     0     0     0     0     0   6720 1491840
+  STD     0     0     0     0     2     0     0     0     7     0     0     0     1     0     0     0     0     0   6720 1498560
+  STD     0     0     0     0     2     0     0     0     6     0     0     0     1     0     0     0     0     0   6720 1505280
+  STD     0     0     0     0     2     0     0     0     5     0     0     0     1     0     0     0     0     0   6720 1512000
+  STD     0     0     0     0     2     0     0     0     4     0     0     0     1     0     0     0     0     0   6720 1518720
+  STD     0     0     0     0     2     0     0     0     3     0     0     0     1     0     0     0     0     0   6720 1525440
+  STD     0     0     0     0     2     0     0     0     2     0     0     0     1     0     0     0     0     0   6720 1532160
+  STD     0     0     0     0     2     0     0     0     1     0     0     0     1     0     0     0     0     0   6720 1538880
+  STD     0     0     0     0     2     0     0     0     0     0     0     0     1     0     0     0     0     0   6720 1545600
+  STD     0     0     0     0     2     0     0     0    -1     0     0     0     1     0     0     0     0     0   6720 1552320
+  STD     0     0     0     0     2     0     0     0    -2     0     0     0     1     0     0     0     0     0   6720 1559040
+  STD     0     0     0     0     2     0     0     0    -3     0     0     0     1     0     0     0     0     0   6720 1565760
+  STD     0     0     0     0     2     0     0     0    -4     0     0     0     1     0     0     0     0     0   6720 1572480
+  STD     0     0     0     0     2     0     0     0    -5     0     0     0     1     0     0     0     0     0   6720 1579200
+  STD     0     0     0     0     2     0     0     0    -6     0     0     0     1     0     0     0     0     0   6720 1585920
+  STD     0     0     0     0     2     0     0     0    -7     0     0     0     1     0     0     0     0     0   6720 1592640
+  STD     0     0     0     0     2     0     0     0    -8     0     0     0     1     0     0     0     0     0   6720 1599360
+  STD     0     0     0     0     2     0     0     0    -9     0     0     0     1     0     0     0     0     0   6720 1606080
+  STD     0     0     0     0     2     0     0     0   -10     0     0     0     1     0     0     0     0     0   6720 1612800
+  STD     0     0     0     0     2     0     0     0   -11     0     0     0     1     0     0     0     0     0   6720 1619520
+  STD     0     0     0     0     2     0     0     0   -12     0     0     0     1     0     0     0     0     0   6720 1626240
+  STD     0     0     0     0     2     0     0     0   -13     0     0     0     1     0     0     0     0     0   6720 1632960
+  STD     0     0     0     0     2     0     0     0   -14     0     0     0     1     0     0     0     0     0   6720 1639680
+  STD     0     0     0     0     2     0     0     0   -15     0     0     0     1     0     0     0     0     0   6720 1646400
+  STD     0     0     0     0     2     0     0     0   -16     0     0     0     1     0     0     0     0     0   6720 1653120
+  STD     0     0     0     0     2     0     0     0   -17     0     0     0     1     0     0     0     0     0   6720 1659840
+  STD     0     0     0     0     2     0     0     0   -18     0     0     0     1     0     0     0     0     0   6720 1666560
+  STD     0     0     0     0     2     0     0     0   -19     0     0     0     1     0     0     0     0     0   6720 1673280
+  STD     0     0     0     0     2     0     0     0   -20     0     0     0     1     0     0     0     0     0   6720 1680000
+  STD     0     0     0     0     2     0     0     0   -21     0     0     0     1     0     0     0     0     0   6720 1686720
+  STD     0     0     0     0     2     0     0     0   -22     0     0     0     1     0     0     0     0     0   6720 1693440
+  STD     0     0     0     0     2     0     0     0   -23     0     0     0     1     0     0     0     0     0   6720 1700160
+  STD     0     0     0     0     2     0     0     0   -24     0     0     0     1     0     0     0     0     0   6720 1706880
+  STD     0     0     0     0     2     0     0     0   -25     0     0     0     1     0     0     0     0     0   6720 1713600
+  STD     0     0     0     0     2     0     0     0   -26     0     0     0     1     0     0     0     0     0   6720 1720320
+  STD     0     0     0     0     2     0     0     0   -27     0     0     0     1     0     0     0     0     0   6720 1727040
+  STD     0     0     0     0     2     0     0     0   -28     0     0     0     1     0     0     0     0     0   6720 1733760
+  STD     0     0     0     0     2     0     0     0   -29     0     0     0     1     0     0     0     0     0   6720 1740480
+  STD     0     0     0     0     2     0     0     0   -30     0     0     0     1     0     0     0     0     0   6720 1747200
+  STD     0     0     0     0     2     0     0     0   -31     0     0     0     1     0     0     0     0     0   6720 1753920
+  STD     0     0     0     0     2     0     0     0   -32     0     0     0     1     0     0     0     0     0   6720 1760640
+  STD     0     0     0     0     2     0     0     0   -33     0     0     0     1     0     0     0     0     0   6720 1767360
+  STD     0     0     0     0     2     0     0     0   -34     0     0     0     1     0     0     0     0     0   6720 1774080
+  STD     0     0     0     0     2     0     0     0   -35     0     0     0     1     0     0     0     0     0   6720 1780800
+  STD     0     0     0     0     2     0     0     0   -36     0     0     0     1     0     0     0     0     0   6720 1787520
+  STD     0     0     0     0     2     0     0     0   -37     0     0     0     1     0     0     0     0     0   6720 1794240
+  STD     0     0     0     0     2     0     0     0   -38     0     0     0     1     0     0     0     0     0   6720 1800960
+  STD     0     0     0     0     2     0     0     0   -39     0     0     0     1     0     0     0     0     0   6720 1807680
+  STD     0     0     0     0     2     0     0     0   -40     0     0     0     1     0     0     0     0     0   6720 1814400
+  STD     0     0     0     0     2     0     0     0   -41     0     0     0     1     0     0     0     0     0   6720 1821120
+  STD     0     0     0     0     3     0     0     0    41     0     0     0     1     0     0     0     0     0   6720 1827840
+  STD     0     0     0     0     3     0     0     0    40     0     0     0     1     0     0     0     0     0   6720 1834560
+  STD     0     0     0     0     3     0     0     0    39     0     0     0     1     0     0     0     0     0   6720 1841280
+  STD     0     0     0     0     3     0     0     0    38     0     0     0     1     0     0     0     0     0   6720 1848000
+  STD     0     0     0     0     3     0     0     0    37     0     0     0     1     0     0     0     0     0   6720 1854720
+  STD     0     0     0     0     3     0     0     0    36     0     0     0     1     0     0     0     0     0   6720 1861440
+  STD     0     0     0     0     3     0     0     0    35     0     0     0     1     0     0     0     0     0   6720 1868160
+  STD     0     0     0     0     3     0     0     0    34     0     0     0     1     0     0     0     0     0   6720 1874880
+  STD     0     0     0     0     3     0     0     0    33     0     0     0     1     0     0     0     0     0   6720 1881600
+  STD     0     0     0     0     3     0     0     0    32     0     0     0     1     0     0     0     0     0   6720 1888320
+  STD     0     0     0     0     3     0     0     0    31     0     0     0     1     0     0     0     0     0   6720 1895040
+  STD     0     0     0     0     3     0     0     0    30     0     0     0     1     0     0     0     0     0   6720 1901760
+  STD     0     0     0     0     3     0     0     0    29     0     0     0     1     0     0     0     0     0   6720 1908480
+  STD     0     0     0     0     3     0     0     0    28     0     0     0     1     0     0     0     0     0   6720 1915200
+  STD     0     0     0     0     3     0     0     0    27     0     0     0     1     0     0     0     0     0   6720 1921920
+  STD     0     0     0     0     3     0     0     0    26     0     0     0     1     0     0     0     0     0   6720 1928640
+  STD     0     0     0     0     3     0     0     0    25     0     0     0     1     0     0     0     0     0   6720 1935360
+  STD     0     0     0     0     3     0     0     0    24     0     0     0     1     0     0     0     0     0   6720 1942080
+  STD     0     0     0     0     3     0     0     0    23     0     0     0     1     0     0     0     0     0   6720 1948800
+  STD     0     0     0     0     3     0     0     0    22     0     0     0     1     0     0     0     0     0   6720 1955520
+  STD     0     0     0     0     3     0     0     0    21     0     0     0     1     0     0     0     0     0   6720 1962240
+  STD     0     0     0     0     3     0     0     0    20     0     0     0     1     0     0     0     0     0   6720 1968960
+  STD     0     0     0     0     3     0     0     0    19     0     0     0     1     0     0     0     0     0   6720 1975680
+  STD     0     0     0     0     3     0     0     0    18     0     0     0     1     0     0     0     0     0   6720 1982400
+  STD     0     0     0     0     3     0     0     0    17     0     0     0     1     0     0     0     0     0   6720 1989120
+  STD     0     0     0     0     3     0     0     0    16     0     0     0     1     0     0     0     0     0   6720 1995840
+  STD     0     0     0     0     3     0     0     0    15     0     0     0     1     0     0     0     0     0   6720 2002560
+  STD     0     0     0     0     3     0     0     0    14     0     0     0     1     0     0     0     0     0   6720 2009280
+  STD     0     0     0     0     3     0     0     0    13     0     0     0     1     0     0     0     0     0   6720 2016000
+  STD     0     0     0     0     3     0     0     0    12     0     0     0     1     0     0     0     0     0   6720 2022720
+  STD     0     0     0     0     3     0     0     0    11     0     0     0     1     0     0     0     0     0   6720 2029440
+  STD     0     0     0     0     3     0     0     0    10     0     0     0     1     0     0     0     0     0   6720 2036160
+  STD     0     0     0     0     3     0     0     0     9     0     0     0     1     0     0     0     0     0   6720 2042880
+  STD     0     0     0     0     3     0     0     0     8     0     0     0     1     0     0     0     0     0   6720 2049600
+  STD     0     0     0     0     3     0     0     0     7     0     0     0     1     0     0     0     0     0   6720 2056320
+  STD     0     0     0     0     3     0     0     0     6     0     0     0     1     0     0     0     0     0   6720 2063040
+  STD     0     0     0     0     3     0     0     0     5     0     0     0     1     0     0     0     0     0   6720 2069760
+  STD     0     0     0     0     3     0     0     0     4     0     0     0     1     0     0     0     0     0   6720 2076480
+  STD     0     0     0     0     3     0     0     0     3     0     0     0     1     0     0     0     0     0   6720 2083200
+  STD     0     0     0     0     3     0     0     0     2     0     0     0     1     0     0     0     0     0   6720 2089920
+  STD     0     0     0     0     3     0     0     0     1     0     0     0     1     0     0     0     0     0   6720 2096640
+  STD     0     0     0     0     3     0     0     0     0     0     0     0     1     0     0     0     0     0   6720 2103360
+  STD     0     0     0     0     3     0     0     0    -1     0     0     0     1     0     0     0     0     0   6720 2110080
+  STD     0     0     0     0     3     0     0     0    -2     0     0     0     1     0     0     0     0     0   6720 2116800
+  STD     0     0     0     0     3     0     0     0    -3     0     0     0     1     0     0     0     0     0   6720 2123520
+  STD     0     0     0     0     3     0     0     0    -4     0     0     0     1     0     0     0     0     0   6720 2130240
+  STD     0     0     0     0     3     0     0     0    -5     0     0     0     1     0     0     0     0     0   6720 2136960
+  STD     0     0     0     0     3     0     0     0    -6     0     0     0     1     0     0     0     0     0   6720 2143680
+  STD     0     0     0     0     3     0     0     0    -7     0     0     0     1     0     0     0     0     0   6720 2150400
+  STD     0     0     0     0     3     0     0     0    -8     0     0     0     1     0     0     0     0     0   6720 2157120
+  STD     0     0     0     0     3     0     0     0    -9     0     0     0     1     0     0     0     0     0   6720 2163840
+  STD     0     0     0     0     3     0     0     0   -10     0     0     0     1     0     0     0     0     0   6720 2170560
+  STD     0     0     0     0     3     0     0     0   -11     0     0     0     1     0     0     0     0     0   6720 2177280
+  STD     0     0     0     0     3     0     0     0   -12     0     0     0     1     0     0     0     0     0   6720 2184000
+  STD     0     0     0     0     3     0     0     0   -13     0     0     0     1     0     0     0     0     0   6720 2190720
+  STD     0     0     0     0     3     0     0     0   -14     0     0     0     1     0     0     0     0     0   6720 2197440
+  STD     0     0     0     0     3     0     0     0   -15     0     0     0     1     0     0     0     0     0   6720 2204160
+  STD     0     0     0     0     3     0     0     0   -16     0     0     0     1     0     0     0     0     0   6720 2210880
+  STD     0     0     0     0     3     0     0     0   -17     0     0     0     1     0     0     0     0     0   6720 2217600
+  STD     0     0     0     0     3     0     0     0   -18     0     0     0     1     0     0     0     0     0   6720 2224320
+  STD     0     0     0     0     3     0     0     0   -19     0     0     0     1     0     0     0     0     0   6720 2231040
+  STD     0     0     0     0     3     0     0     0   -20     0     0     0     1     0     0     0     0     0   6720 2237760
+  STD     0     0     0     0     3     0     0     0   -21     0     0     0     1     0     0     0     0     0   6720 2244480
+  STD     0     0     0     0     3     0     0     0   -22     0     0     0     1     0     0     0     0     0   6720 2251200
+  STD     0     0     0     0     3     0     0     0   -23     0     0     0     1     0     0     0     0     0   6720 2257920
+  STD     0     0     0     0     3     0     0     0   -24     0     0     0     1     0     0     0     0     0   6720 2264640
+  STD     0     0     0     0     3     0     0     0   -25     0     0     0     1     0     0     0     0     0   6720 2271360
+  STD     0     0     0     0     3     0     0     0   -26     0     0     0     1     0     0     0     0     0   6720 2278080
+  STD     0     0     0     0     3     0     0     0   -27     0     0     0     1     0     0     0     0     0   6720 2284800
+  STD     0     0     0     0     3     0     0     0   -28     0     0     0     1     0     0     0     0     0   6720 2291520
+  STD     0     0     0     0     3     0     0     0   -29     0     0     0     1     0     0     0     0     0   6720 2298240
+  STD     0     0     0     0     3     0     0     0   -30     0     0     0     1     0     0     0     0     0   6720 2304960
+  STD     0     0     0     0     3     0     0     0   -31     0     0     0     1     0     0     0     0     0   6720 2311680
+  STD     0     0     0     0     3     0     0     0   -32     0     0     0     1     0     0     0     0     0   6720 2318400
+  STD     0     0     0     0     3     0     0     0   -33     0     0     0     1     0     0     0     0     0   6720 2325120
+  STD     0     0     0     0     3     0     0     0   -34     0     0     0     1     0     0     0     0     0   6720 2331840
+  STD     0     0     0     0     3     0     0     0   -35     0     0     0     1     0     0     0     0     0   6720 2338560
+  STD     0     0     0     0     3     0     0     0   -36     0     0     0     1     0     0     0     0     0   6720 2345280
+  STD     0     0     0     0     3     0     0     0   -37     0     0     0     1     0     0     0     0     0   6720 2352000
+  STD     0     0     0     0     3     0     0     0   -38     0     0     0     1     0     0     0     0     0   6720 2358720
+  STD     0     0     0     0     3     0     0     0   -39     0     0     0     1     0     0     0     0     0   6720 2365440
+  STD     0     0     0     0     3     0     0     0   -40     0     0     0     1     0     0     0     0     0   6720 2372160
+  STD     0     0     0     0     3     0     0     0   -41     0     0     0     1     0     0     0     0     0   6720 2378880
+  STD     0     0     0     0     4     0     0     0    41     0     0     0     1     0     0     0     0     0   6720 2385600
+  STD     0     0     0     0     4     0     0     0    40     0     0     0     1     0     0     0     0     0   6720 2392320
+  STD     0     0     0     0     4     0     0     0    39     0     0     0     1     0     0     0     0     0   6720 2399040
+  STD     0     0     0     0     4     0     0     0    38     0     0     0     1     0     0     0     0     0   6720 2405760
+  STD     0     0     0     0     4     0     0     0    37     0     0     0     1     0     0     0     0     0   6720 2412480
+  STD     0     0     0     0     4     0     0     0    36     0     0     0     1     0     0     0     0     0   6720 2419200
+  STD     0     0     0     0     4     0     0     0    35     0     0     0     1     0     0     0     0     0   6720 2425920
+  STD     0     0     0     0     4     0     0     0    34     0     0     0     1     0     0     0     0     0   6720 2432640
+  STD     0     0     0     0     4     0     0     0    33     0     0     0     1     0     0     0     0     0   6720 2439360
+  STD     0     0     0     0     4     0     0     0    32     0     0     0     1     0     0     0     0     0   6720 2446080
+  STD     0     0     0     0     4     0     0     0    31     0     0     0     1     0     0     0     0     0   6720 2452800
+  STD     0     0     0     0     4     0     0     0    30     0     0     0     1     0     0     0     0     0   6720 2459520
+  STD     0     0     0     0     4     0     0     0    29     0     0     0     1     0     0     0     0     0   6720 2466240
+  STD     0     0     0     0     4     0     0     0    28     0     0     0     1     0     0     0     0     0   6720 2472960
+  STD     0     0     0     0     4     0     0     0    27     0     0     0     1     0     0     0     0     0   6720 2479680
+  STD     0     0     0     0     4     0     0     0    26     0     0     0     1     0     0     0     0     0   6720 2486400
+  STD     0     0     0     0     4     0     0     0    25     0     0     0     1     0     0     0     0     0   6720 2493120
+  STD     0     0     0     0     4     0     0     0    24     0     0     0     1     0     0     0     0     0   6720 2499840
+  STD     0     0     0     0     4     0     0     0    23     0     0     0     1     0     0     0     0     0   6720 2506560
+  STD     0     0     0     0     4     0     0     0    22     0     0     0     1     0     0     0     0     0   6720 2513280
+  STD     0     0     0     0     4     0     0     0    21     0     0     0     1     0     0     0     0     0   6720 2520000
+  STD     0     0     0     0     4     0     0     0    20     0     0     0     1     0     0     0     0     0   6720 2526720
+  STD     0     0     0     0     4     0     0     0    19     0     0     0     1     0     0     0     0     0   6720 2533440
+  STD     0     0     0     0     4     0     0     0    18     0     0     0     1     0     0     0     0     0   6720 2540160
+  STD     0     0     0     0     4     0     0     0    17     0     0     0     1     0     0     0     0     0   6720 2546880
+  STD     0     0     0     0     4     0     0     0    16     0     0     0     1     0     0     0     0     0   6720 2553600
+  STD     0     0     0     0     4     0     0     0    15     0     0     0     1     0     0     0     0     0   6720 2560320
+  STD     0     0     0     0     4     0     0     0    14     0     0     0     1     0     0     0     0     0   6720 2567040
+  STD     0     0     0     0     4     0     0     0    13     0     0     0     1     0     0     0     0     0   6720 2573760
+  STD     0     0     0     0     4     0     0     0    12     0     0     0     1     0     0     0     0     0   6720 2580480
+  STD     0     0     0     0     4     0     0     0    11     0     0     0     1     0     0     0     0     0   6720 2587200
+  STD     0     0     0     0     4     0     0     0    10     0     0     0     1     0     0     0     0     0   6720 2593920
+  STD     0     0     0     0     4     0     0     0     9     0     0     0     1     0     0     0     0     0   6720 2600640
+  STD     0     0     0     0     4     0     0     0     8     0     0     0     1     0     0     0     0     0   6720 2607360
+  STD     0     0     0     0     4     0     0     0     7     0     0     0     1     0     0     0     0     0   6720 2614080
+  STD     0     0     0     0     4     0     0     0     6     0     0     0     1     0     0     0     0     0   6720 2620800
+  STD     0     0     0     0     4     0     0     0     5     0     0     0     1     0     0     0     0     0   6720 2627520
+  STD     0     0     0     0     4     0     0     0     4     0     0     0     1     0     0     0     0     0   6720 2634240
+  STD     0     0     0     0     4     0     0     0     3     0     0     0     1     0     0     0     0     0   6720 2640960
+  STD     0     0     0     0     4     0     0     0     2     0     0     0     1     0     0     0     0     0   6720 2647680
+  STD     0     0     0     0     4     0     0     0     1     0     0     0     1     0     0     0     0     0   6720 2654400
+  STD     0     0     0     0     4     0     0     0     0     0     0     0     1     0     0     0     0     0   6720 2661120
+  STD     0     0     0     0     4     0     0     0    -1     0     0     0     1     0     0     0     0     0   6720 2667840
+  STD     0     0     0     0     4     0     0     0    -2     0     0     0     1     0     0     0     0     0   6720 2674560
+  STD     0     0     0     0     4     0     0     0    -3     0     0     0     1     0     0     0     0     0   6720 2681280
+  STD     0     0     0     0     4     0     0     0    -4     0     0     0     1     0     0     0     0     0   6720 2688000
+  STD     0     0     0     0     4     0     0     0    -5     0     0     0     1     0     0     0     0     0   6720 2694720
+  STD     0     0     0     0     4     0     0     0    -6     0     0     0     1     0     0     0     0     0   6720 2701440
+  STD     0     0     0     0     4     0     0     0    -7     0     0     0     1     0     0     0     0     0   6720 2708160
+  STD     0     0     0     0     4     0     0     0    -8     0     0     0     1     0     0     0     0     0   6720 2714880
+  STD     0     0     0     0     4     0     0     0    -9     0     0     0     1     0     0     0     0     0   6720 2721600
+  STD     0     0     0     0     4     0     0     0   -10     0     0     0     1     0     0     0     0     0   6720 2728320
+  STD     0     0     0     0     4     0     0     0   -11     0     0     0     1     0     0     0     0     0   6720 2735040
+  STD     0     0     0     0     4     0     0     0   -12     0     0     0     1     0     0     0     0     0   6720 2741760
+  STD     0     0     0     0     4     0     0     0   -13     0     0     0     1     0     0     0     0     0   6720 2748480
+  STD     0     0     0     0     4     0     0     0   -14     0     0     0     1     0     0     0     0     0   6720 2755200
+  STD     0     0     0     0     4     0     0     0   -15     0     0     0     1     0     0     0     0     0   6720 2761920
+  STD     0     0     0     0     4     0     0     0   -16     0     0     0     1     0     0     0     0     0   6720 2768640
+  STD     0     0     0     0     4     0     0     0   -17     0     0     0     1     0     0     0     0     0   6720 2775360
+  STD     0     0     0     0     4     0     0     0   -18     0     0     0     1     0     0     0     0     0   6720 2782080
+  STD     0     0     0     0     4     0     0     0   -19     0     0     0     1     0     0     0     0     0   6720 2788800
+  STD     0     0     0     0     4     0     0     0   -20     0     0     0     1     0     0     0     0     0   6720 2795520
+  STD     0     0     0     0     4     0     0     0   -21     0     0     0     1     0     0     0     0     0   6720 2802240
+  STD     0     0     0     0     4     0     0     0   -22     0     0     0     1     0     0     0     0     0   6720 2808960
+  STD     0     0     0     0     4     0     0     0   -23     0     0     0     1     0     0     0     0     0   6720 2815680
+  STD     0     0     0     0     4     0     0     0   -24     0     0     0     1     0     0     0     0     0   6720 2822400
+  STD     0     0     0     0     4     0     0     0   -25     0     0     0     1     0     0     0     0     0   6720 2829120
+  STD     0     0     0     0     4     0     0     0   -26     0     0     0     1     0     0     0     0     0   6720 2835840
+  STD     0     0     0     0     4     0     0     0   -27     0     0     0     1     0     0     0     0     0   6720 2842560
+  STD     0     0     0     0     4     0     0     0   -28     0     0     0     1     0     0     0     0     0   6720 2849280
+  STD     0     0     0     0     4     0     0     0   -29     0     0     0     1     0     0     0     0     0   6720 2856000
+  STD     0     0     0     0     4     0     0     0   -30     0     0     0     1     0     0     0     0     0   6720 2862720
+  STD     0     0     0     0     4     0     0     0   -31     0     0     0     1     0     0     0     0     0   6720 2869440
+  STD     0     0     0     0     4     0     0     0   -32     0     0     0     1     0     0     0     0     0   6720 2876160
+  STD     0     0     0     0     4     0     0     0   -33     0     0     0     1     0     0     0     0     0   6720 2882880
+  STD     0     0     0     0     4     0     0     0   -34     0     0     0     1     0     0     0     0     0   6720 2889600
+  STD     0     0     0     0     4     0     0     0   -35     0     0     0     1     0     0     0     0     0   6720 2896320
+  STD     0     0     0     0     4     0     0     0   -36     0     0     0     1     0     0     0     0     0   6720 2903040
+  STD     0     0     0     0     4     0     0     0   -37     0     0     0     1     0     0     0     0     0   6720 2909760
+  STD     0     0     0     0     4     0     0     0   -38     0     0     0     1     0     0     0     0     0   6720 2916480
+  STD     0     0     0     0     4     0     0     0   -39     0     0     0     1     0     0     0     0     0   6720 2923200
+  STD     0     0     0     0     4     0     0     0   -40     0     0     0     1     0     0     0     0     0   6720 2929920
+  STD     0     0     0     0     4     0     0     0   -41     0     0     0     1     0     0     0     0     0   6720 2936640
+  STD     0     0     0     0     5     0     0     0    41     0     0     0     1     0     0     0     0     0   6720 2943360
+  STD     0     0     0     0     5     0     0     0    40     0     0     0     1     0     0     0     0     0   6720 2950080
+  STD     0     0     0     0     5     0     0     0    39     0     0     0     1     0     0     0     0     0   6720 2956800
+  STD     0     0     0     0     5     0     0     0    38     0     0     0     1     0     0     0     0     0   6720 2963520
+  STD     0     0     0     0     5     0     0     0    37     0     0     0     1     0     0     0     0     0   6720 2970240
+  STD     0     0     0     0     5     0     0     0    36     0     0     0     1     0     0     0     0     0   6720 2976960
+  STD     0     0     0     0     5     0     0     0    35     0     0     0     1     0     0     0     0     0   6720 2983680
+  STD     0     0     0     0     5     0     0     0    34     0     0     0     1     0     0     0     0     0   6720 2990400
+  STD     0     0     0     0     5     0     0     0    33     0     0     0     1     0     0     0     0     0   6720 2997120
+  STD     0     0     0     0     5     0     0     0    32     0     0     0     1     0     0     0     0     0   6720 3003840
+  STD     0     0     0     0     5     0     0     0    31     0     0     0     1     0     0     0     0     0   6720 3010560
+  STD     0     0     0     0     5     0     0     0    30     0     0     0     1     0     0     0     0     0   6720 3017280
+  STD     0     0     0     0     5     0     0     0    29     0     0     0     1     0     0     0     0     0   6720 3024000
+  STD     0     0     0     0     5     0     0     0    28     0     0     0     1     0     0     0     0     0   6720 3030720
+  STD     0     0     0     0     5     0     0     0    27     0     0     0     1     0     0     0     0     0   6720 3037440
+  STD     0     0     0     0     5     0     0     0    26     0     0     0     1     0     0     0     0     0   6720 3044160
+  STD     0     0     0     0     5     0     0     0    25     0     0     0     1     0     0     0     0     0   6720 3050880
+  STD     0     0     0     0     5     0     0     0    24     0     0     0     1     0     0     0     0     0   6720 3057600
+  STD     0     0     0     0     5     0     0     0    23     0     0     0     1     0     0     0     0     0   6720 3064320
+  STD     0     0     0     0     5     0     0     0    22     0     0     0     1     0     0     0     0     0   6720 3071040
+  STD     0     0     0     0     5     0     0     0    21     0     0     0     1     0     0     0     0     0   6720 3077760
+  STD     0     0     0     0     5     0     0     0    20     0     0     0     1     0     0     0     0     0   6720 3084480
+  STD     0     0     0     0     5     0     0     0    19     0     0     0     1     0     0     0     0     0   6720 3091200
+  STD     0     0     0     0     5     0     0     0    18     0     0     0     1     0     0     0     0     0   6720 3097920
+  STD     0     0     0     0     5     0     0     0    17     0     0     0     1     0     0     0     0     0   6720 3104640
+  STD     0     0     0     0     5     0     0     0    16     0     0     0     1     0     0     0     0     0   6720 3111360
+  STD     0     0     0     0     5     0     0     0    15     0     0     0     1     0     0     0     0     0   6720 3118080
+  STD     0     0     0     0     5     0     0     0    14     0     0     0     1     0     0     0     0     0   6720 3124800
+  STD     0     0     0     0     5     0     0     0    13     0     0     0     1     0     0     0     0     0   6720 3131520
+  STD     0     0     0     0     5     0     0     0    12     0     0     0     1     0     0     0     0     0   6720 3138240
+  STD     0     0     0     0     5     0     0     0    11     0     0     0     1     0     0     0     0     0   6720 3144960
+  STD     0     0     0     0     5     0     0     0    10     0     0     0     1     0     0     0     0     0   6720 3151680
+  STD     0     0     0     0     5     0     0     0     9     0     0     0     1     0     0     0     0     0   6720 3158400
+  STD     0     0     0     0     5     0     0     0     8     0     0     0     1     0     0     0     0     0   6720 3165120
+  STD     0     0     0     0     5     0     0     0     7     0     0     0     1     0     0     0     0     0   6720 3171840
+  STD     0     0     0     0     5     0     0     0     6     0     0     0     1     0     0     0     0     0   6720 3178560
+  STD     0     0     0     0     5     0     0     0     5     0     0     0     1     0     0     0     0     0   6720 3185280
+  STD     0     0     0     0     5     0     0     0     4     0     0     0     1     0     0     0     0     0   6720 3192000
+  STD     0     0     0     0     5     0     0     0     3     0     0     0     1     0     0     0     0     0   6720 3198720
+  STD     0     0     0     0     5     0     0     0     2     0     0     0     1     0     0     0     0     0   6720 3205440
+  STD     0     0     0     0     5     0     0     0     1     0     0     0     1     0     0     0     0     0   6720 3212160
+  STD     0     0     0     0     5     0     0     0     0     0     0     0     1     0     0     0     0     0   6720 3218880
+  STD     0     0     0     0     5     0     0     0    -1     0     0     0     1     0     0     0     0     0   6720 3225600
+  STD     0     0     0     0     5     0     0     0    -2     0     0     0     1     0     0     0     0     0   6720 3232320
+  STD     0     0     0     0     5     0     0     0    -3     0     0     0     1     0     0     0     0     0   6720 3239040
+  STD     0     0     0     0     5     0     0     0    -4     0     0     0     1     0     0     0     0     0   6720 3245760
+  STD     0     0     0     0     5     0     0     0    -5     0     0     0     1     0     0     0     0     0   6720 3252480
+  STD     0     0     0     0     5     0     0     0    -6     0     0     0     1     0     0     0     0     0   6720 3259200
+  STD     0     0     0     0     5     0     0     0    -7     0     0     0     1     0     0     0     0     0   6720 3265920
+  STD     0     0     0     0     5     0     0     0    -8     0     0     0     1     0     0     0     0     0   6720 3272640
+  STD     0     0     0     0     5     0     0     0    -9     0     0     0     1     0     0     0     0     0   6720 3279360
+  STD     0     0     0     0     5     0     0     0   -10     0     0     0     1     0     0     0     0     0   6720 3286080
+  STD     0     0     0     0     5     0     0     0   -11     0     0     0     1     0     0     0     0     0   6720 3292800
+  STD     0     0     0     0     5     0     0     0   -12     0     0     0     1     0     0     0     0     0   6720 3299520
+  STD     0     0     0     0     5     0     0     0   -13     0     0     0     1     0     0     0     0     0   6720 3306240
+  STD     0     0     0     0     5     0     0     0   -14     0     0     0     1     0     0     0     0     0   6720 3312960
+  STD     0     0     0     0     5     0     0     0   -15     0     0     0     1     0     0     0     0     0   6720 3319680
+  STD     0     0     0     0     5     0     0     0   -16     0     0     0     1     0     0     0     0     0   6720 3326400
+  STD     0     0     0     0     5     0     0     0   -17     0     0     0     1     0     0     0     0     0   6720 3333120
+  STD     0     0     0     0     5     0     0     0   -18     0     0     0     1     0     0     0     0     0   6720 3339840
+  STD     0     0     0     0     5     0     0     0   -19     0     0     0     1     0     0     0     0     0   6720 3346560
+  STD     0     0     0     0     5     0     0     0   -20     0     0     0     1     0     0     0     0     0   6720 3353280
+  STD     0     0     0     0     5     0     0     0   -21     0     0     0     1     0     0     0     0     0   6720 3360000
+  STD     0     0     0     0     5     0     0     0   -22     0     0     0     1     0     0     0     0     0   6720 3366720
+  STD     0     0     0     0     5     0     0     0   -23     0     0     0     1     0     0     0     0     0   6720 3373440
+  STD     0     0     0     0     5     0     0     0   -24     0     0     0     1     0     0     0     0     0   6720 3380160
+  STD     0     0     0     0     5     0     0     0   -25     0     0     0     1     0     0     0     0     0   6720 3386880
+  STD     0     0     0     0     5     0     0     0   -26     0     0     0     1     0     0     0     0     0   6720 3393600
+  STD     0     0     0     0     5     0     0     0   -27     0     0     0     1     0     0     0     0     0   6720 3400320
+  STD     0     0     0     0     5     0     0     0   -28     0     0     0     1     0     0     0     0     0   6720 3407040
+  STD     0     0     0     0     5     0     0     0   -29     0     0     0     1     0     0     0     0     0   6720 3413760
+  STD     0     0     0     0     5     0     0     0   -30     0     0     0     1     0     0     0     0     0   6720 3420480
+  STD     0     0     0     0     5     0     0     0   -31     0     0     0     1     0     0     0     0     0   6720 3427200
+  STD     0     0     0     0     5     0     0     0   -32     0     0     0     1     0     0     0     0     0   6720 3433920
+  STD     0     0     0     0     5     0     0     0   -33     0     0     0     1     0     0     0     0     0   6720 3440640
+  STD     0     0     0     0     5     0     0     0   -34     0     0     0     1     0     0     0     0     0   6720 3447360
+  STD     0     0     0     0     5     0     0     0   -35     0     0     0     1     0     0     0     0     0   6720 3454080
+  STD     0     0     0     0     5     0     0     0   -36     0     0     0     1     0     0     0     0     0   6720 3460800
+  STD     0     0     0     0     5     0     0     0   -37     0     0     0     1     0     0     0     0     0   6720 3467520
+  STD     0     0     0     0     5     0     0     0   -38     0     0     0     1     0     0     0     0     0   6720 3474240
+  STD     0     0     0     0     5     0     0     0   -39     0     0     0     1     0     0     0     0     0   6720 3480960
+  STD     0     0     0     0     5     0     0     0   -40     0     0     0     1     0     0     0     0     0   6720 3487680
+  STD     0     0     0     0     5     0     0     0   -41     0     0     0     1     0     0     0     0     0   6720 3494400
+  STD     0     0     0     0     6     0     0     0    41     0     0     0     1     0     0     0     0     0   6720 3501120
+  STD     0     0     0     0     6     0     0     0    40     0     0     0     1     0     0     0     0     0   6720 3507840
+  STD     0     0     0     0     6     0     0     0    39     0     0     0     1     0     0     0     0     0   6720 3514560
+  STD     0     0     0     0     6     0     0     0    38     0     0     0     1     0     0     0     0     0   6720 3521280
+  STD     0     0     0     0     6     0     0     0    37     0     0     0     1     0     0     0     0     0   6720 3528000
+  STD     0     0     0     0     6     0     0     0    36     0     0     0     1     0     0     0     0     0   6720 3534720
+  STD     0     0     0     0     6     0     0     0    35     0     0     0     1     0     0     0     0     0   6720 3541440
+  STD     0     0     0     0     6     0     0     0    34     0     0     0     1     0     0     0     0     0   6720 3548160
+  STD     0     0     0     0     6     0     0     0    33     0     0     0     1     0     0     0     0     0   6720 3554880
+  STD     0     0     0     0     6     0     0     0    32     0     0     0     1     0     0     0     0     0   6720 3561600
+  STD     0     0     0     0     6     0     0     0    31     0     0     0     1     0     0     0     0     0   6720 3568320
+  STD     0     0     0     0     6     0     0     0    30     0     0     0     1     0     0     0     0     0   6720 3575040
+  STD     0     0     0     0     6     0     0     0    29     0     0     0     1     0     0     0     0     0   6720 3581760
+  STD     0     0     0     0     6     0     0     0    28     0     0     0     1     0     0     0     0     0   6720 3588480
+  STD     0     0     0     0     6     0     0     0    27     0     0     0     1     0     0     0     0     0   6720 3595200
+  STD     0     0     0     0     6     0     0     0    26     0     0     0     1     0     0     0     0     0   6720 3601920
+  STD     0     0     0     0     6     0     0     0    25     0     0     0     1     0     0     0     0     0   6720 3608640
+  STD     0     0     0     0     6     0     0     0    24     0     0     0     1     0     0     0     0     0   6720 3615360
+  STD     0     0     0     0     6     0     0     0    23     0     0     0     1     0     0     0     0     0   6720 3622080
+  STD     0     0     0     0     6     0     0     0    22     0     0     0     1     0     0     0     0     0   6720 3628800
+  STD     0     0     0     0     6     0     0     0    21     0     0     0     1     0     0     0     0     0   6720 3635520
+  STD     0     0     0     0     6     0     0     0    20     0     0     0     1     0     0     0     0     0   6720 3642240
+  STD     0     0     0     0     6     0     0     0    19     0     0     0     1     0     0     0     0     0   6720 3648960
+  STD     0     0     0     0     6     0     0     0    18     0     0     0     1     0     0     0     0     0   6720 3655680
+  STD     0     0     0     0     6     0     0     0    17     0     0     0     1     0     0     0     0     0   6720 3662400
+  STD     0     0     0     0     6     0     0     0    16     0     0     0     1     0     0     0     0     0   6720 3669120
+  STD     0     0     0     0     6     0     0     0    15     0     0     0     1     0     0     0     0     0   6720 3675840
+  STD     0     0     0     0     6     0     0     0    14     0     0     0     1     0     0     0     0     0   6720 3682560
+  STD     0     0     0     0     6     0     0     0    13     0     0     0     1     0     0     0     0     0   6720 3689280
+  STD     0     0     0     0     6     0     0     0    12     0     0     0     1     0     0     0     0     0   6720 3696000
+  STD     0     0     0     0     6     0     0     0    11     0     0     0     1     0     0     0     0     0   6720 3702720
+  STD     0     0     0     0     6     0     0     0    10     0     0     0     1     0     0     0     0     0   6720 3709440
+  STD     0     0     0     0     6     0     0     0     9     0     0     0     1     0     0     0     0     0   6720 3716160
+  STD     0     0     0     0     6     0     0     0     8     0     0     0     1     0     0     0     0     0   6720 3722880
+  STD     0     0     0     0     6     0     0     0     7     0     0     0     1     0     0     0     0     0   6720 3729600
+  STD     0     0     0     0     6     0     0     0     6     0     0     0     1     0     0     0     0     0   6720 3736320
+  STD     0     0     0     0     6     0     0     0     5     0     0     0     1     0     0     0     0     0   6720 3743040
+  STD     0     0     0     0     6     0     0     0     4     0     0     0     1     0     0     0     0     0   6720 3749760
+  STD     0     0     0     0     6     0     0     0     3     0     0     0     1     0     0     0     0     0   6720 3756480
+  STD     0     0     0     0     6     0     0     0     2     0     0     0     1     0     0     0     0     0   6720 3763200
+  STD     0     0     0     0     6     0     0     0     1     0     0     0     1     0     0     0     0     0   6720 3769920
+  STD     0     0     0     0     6     0     0     0     0     0     0     0     1     0     0     0     0     0   6720 3776640
+  STD     0     0     0     0     6     0     0     0    -1     0     0     0     1     0     0     0     0     0   6720 3783360
+  STD     0     0     0     0     6     0     0     0    -2     0     0     0     1     0     0     0     0     0   6720 3790080
+  STD     0     0     0     0     6     0     0     0    -3     0     0     0     1     0     0     0     0     0   6720 3796800
+  STD     0     0     0     0     6     0     0     0    -4     0     0     0     1     0     0     0     0     0   6720 3803520
+  STD     0     0     0     0     6     0     0     0    -5     0     0     0     1     0     0     0     0     0   6720 3810240
+  STD     0     0     0     0     6     0     0     0    -6     0     0     0     1     0     0     0     0     0   6720 3816960
+  STD     0     0     0     0     6     0     0     0    -7     0     0     0     1     0     0     0     0     0   6720 3823680
+  STD     0     0     0     0     6     0     0     0    -8     0     0     0     1     0     0     0     0     0   6720 3830400
+  STD     0     0     0     0     6     0     0     0    -9     0     0     0     1     0     0     0     0     0   6720 3837120
+  STD     0     0     0     0     6     0     0     0   -10     0     0     0     1     0     0     0     0     0   6720 3843840
+  STD     0     0     0     0     6     0     0     0   -11     0     0     0     1     0     0     0     0     0   6720 3850560
+  STD     0     0     0     0     6     0     0     0   -12     0     0     0     1     0     0     0     0     0   6720 3857280
+  STD     0     0     0     0     6     0     0     0   -13     0     0     0     1     0     0     0     0     0   6720 3864000
+  STD     0     0     0     0     6     0     0     0   -14     0     0     0     1     0     0     0     0     0   6720 3870720
+  STD     0     0     0     0     6     0     0     0   -15     0     0     0     1     0     0     0     0     0   6720 3877440
+  STD     0     0     0     0     6     0     0     0   -16     0     0     0     1     0     0     0     0     0   6720 3884160
+  STD     0     0     0     0     6     0     0     0   -17     0     0     0     1     0     0     0     0     0   6720 3890880
+  STD     0     0     0     0     6     0     0     0   -18     0     0     0     1     0     0     0     0     0   6720 3897600
+  STD     0     0     0     0     6     0     0     0   -19     0     0     0     1     0     0     0     0     0   6720 3904320
+  STD     0     0     0     0     6     0     0     0   -20     0     0     0     1     0     0     0     0     0   6720 3911040
+  STD     0     0     0     0     6     0     0     0   -21     0     0     0     1     0     0     0     0     0   6720 3917760
+  STD     0     0     0     0     6     0     0     0   -22     0     0     0     1     0     0     0     0     0   6720 3924480
+  STD     0     0     0     0     6     0     0     0   -23     0     0     0     1     0     0     0     0     0   6720 3931200
+  STD     0     0     0     0     6     0     0     0   -24     0     0     0     1     0     0     0     0     0   6720 3937920
+  STD     0     0     0     0     6     0     0     0   -25     0     0     0     1     0     0     0     0     0   6720 3944640
+  STD     0     0     0     0     6     0     0     0   -26     0     0     0     1     0     0     0     0     0   6720 3951360
+  STD     0     0     0     0     6     0     0     0   -27     0     0     0     1     0     0     0     0     0   6720 3958080
+  STD     0     0     0     0     6     0     0     0   -28     0     0     0     1     0     0     0     0     0   6720 3964800
+  STD     0     0     0     0     6     0     0     0   -29     0     0     0     1     0     0     0     0     0   6720 3971520
+  STD     0     0     0     0     6     0     0     0   -30     0     0     0     1     0     0     0     0     0   6720 3978240
+  STD     0     0     0     0     6     0     0     0   -31     0     0     0     1     0     0     0     0     0   6720 3984960
+  STD     0     0     0     0     6     0     0     0   -32     0     0     0     1     0     0     0     0     0   6720 3991680
+  STD     0     0     0     0     6     0     0     0   -33     0     0     0     1     0     0     0     0     0   6720 3998400
+  STD     0     0     0     0     6     0     0     0   -34     0     0     0     1     0     0     0     0     0   6720 4005120
+  STD     0     0     0     0     6     0     0     0   -35     0     0     0     1     0     0     0     0     0   6720 4011840
+  STD     0     0     0     0     6     0     0     0   -36     0     0     0     1     0     0     0     0     0   6720 4018560
+  STD     0     0     0     0     6     0     0     0   -37     0     0     0     1     0     0     0     0     0   6720 4025280
+  STD     0     0     0     0     6     0     0     0   -38     0     0     0     1     0     0     0     0     0   6720 4032000
+  STD     0     0     0     0     6     0     0     0   -39     0     0     0     1     0     0     0     0     0   6720 4038720
+  STD     0     0     0     0     6     0     0     0   -40     0     0     0     1     0     0     0     0     0   6720 4045440
+  STD     0     0     0     0     6     0     0     0   -41     0     0     0     1     0     0     0     0     0   6720 4052160
+  STD     0     0     0     0     7     0     0     0    41     0     0     0     1     0     0     0     0     0   6720 4058880
+  STD     0     0     0     0     7     0     0     0    40     0     0     0     1     0     0     0     0     0   6720 4065600
+  STD     0     0     0     0     7     0     0     0    39     0     0     0     1     0     0     0     0     0   6720 4072320
+  STD     0     0     0     0     7     0     0     0    38     0     0     0     1     0     0     0     0     0   6720 4079040
+  STD     0     0     0     0     7     0     0     0    37     0     0     0     1     0     0     0     0     0   6720 4085760
+  STD     0     0     0     0     7     0     0     0    36     0     0     0     1     0     0     0     0     0   6720 4092480
+  STD     0     0     0     0     7     0     0     0    35     0     0     0     1     0     0     0     0     0   6720 4099200
+  STD     0     0     0     0     7     0     0     0    34     0     0     0     1     0     0     0     0     0   6720 4105920
+  STD     0     0     0     0     7     0     0     0    33     0     0     0     1     0     0     0     0     0   6720 4112640
+  STD     0     0     0     0     7     0     0     0    32     0     0     0     1     0     0     0     0     0   6720 4119360
+  STD     0     0     0     0     7     0     0     0    31     0     0     0     1     0     0     0     0     0   6720 4126080
+  STD     0     0     0     0     7     0     0     0    30     0     0     0     1     0     0     0     0     0   6720 4132800
+  STD     0     0     0     0     7     0     0     0    29     0     0     0     1     0     0     0     0     0   6720 4139520
+  STD     0     0     0     0     7     0     0     0    28     0     0     0     1     0     0     0     0     0   6720 4146240
+  STD     0     0     0     0     7     0     0     0    27     0     0     0     1     0     0     0     0     0   6720 4152960
+  STD     0     0     0     0     7     0     0     0    26     0     0     0     1     0     0     0     0     0   6720 4159680
+  STD     0     0     0     0     7     0     0     0    25     0     0     0     1     0     0     0     0     0   6720 4166400
+  STD     0     0     0     0     7     0     0     0    24     0     0     0     1     0     0     0     0     0   6720 4173120
+  STD     0     0     0     0     7     0     0     0    23     0     0     0     1     0     0     0     0     0   6720 4179840
+  STD     0     0     0     0     7     0     0     0    22     0     0     0     1     0     0     0     0     0   6720 4186560
+  STD     0     0     0     0     7     0     0     0    21     0     0     0     1     0     0     0     0     0   6720 4193280
+  STD     0     0     0     0     7     0     0     0    20     0     0     0     1     0     0     0     0     0   6720 4200000
+  STD     0     0     0     0     7     0     0     0    19     0     0     0     1     0     0     0     0     0   6720 4206720
+  STD     0     0     0     0     7     0     0     0    18     0     0     0     1     0     0     0     0     0   6720 4213440
+  STD     0     0     0     0     7     0     0     0    17     0     0     0     1     0     0     0     0     0   6720 4220160
+  STD     0     0     0     0     7     0     0     0    16     0     0     0     1     0     0     0     0     0   6720 4226880
+  STD     0     0     0     0     7     0     0     0    15     0     0     0     1     0     0     0     0     0   6720 4233600
+  STD     0     0     0     0     7     0     0     0    14     0     0     0     1     0     0     0     0     0   6720 4240320
+  STD     0     0     0     0     7     0     0     0    13     0     0     0     1     0     0     0     0     0   6720 4247040
+  STD     0     0     0     0     7     0     0     0    12     0     0     0     1     0     0     0     0     0   6720 4253760
+  STD     0     0     0     0     7     0     0     0    11     0     0     0     1     0     0     0     0     0   6720 4260480
+  STD     0     0     0     0     7     0     0     0    10     0     0     0     1     0     0     0     0     0   6720 4267200
+  STD     0     0     0     0     7     0     0     0     9     0     0     0     1     0     0     0     0     0   6720 4273920
+  STD     0     0     0     0     7     0     0     0     8     0     0     0     1     0     0     0     0     0   6720 4280640
+  STD     0     0     0     0     7     0     0     0     7     0     0     0     1     0     0     0     0     0   6720 4287360
+  STD     0     0     0     0     7     0     0     0     6     0     0     0     1     0     0     0     0     0   6720 4294080
+  STD     0     0     0     0     7     0     0     0     5     0     0     0     1     0     0     0     0     0   6720 4300800
+  STD     0     0     0     0     7     0     0     0     4     0     0     0     1     0     0     0     0     0   6720 4307520
+  STD     0     0     0     0     7     0     0     0     3     0     0     0     1     0     0     0     0     0   6720 4314240
+  STD     0     0     0     0     7     0     0     0     2     0     0     0     1     0     0     0     0     0   6720 4320960
+  STD     0     0     0     0     7     0     0     0     1     0     0     0     1     0     0     0     0     0   6720 4327680
+  STD     0     0     0     0     7     0     0     0     0     0     0     0     1     0     0     0     0     0   6720 4334400
+  STD     0     0     0     0     7     0     0     0    -1     0     0     0     1     0     0     0     0     0   6720 4341120
+  STD     0     0     0     0     7     0     0     0    -2     0     0     0     1     0     0     0     0     0   6720 4347840
+  STD     0     0     0     0     7     0     0     0    -3     0     0     0     1     0     0     0     0     0   6720 4354560
+  STD     0     0     0     0     7     0     0     0    -4     0     0     0     1     0     0     0     0     0   6720 4361280
+  STD     0     0     0     0     7     0     0     0    -5     0     0     0     1     0     0     0     0     0   6720 4368000
+  STD     0     0     0     0     7     0     0     0    -6     0     0     0     1     0     0     0     0     0   6720 4374720
+  STD     0     0     0     0     7     0     0     0    -7     0     0     0     1     0     0     0     0     0   6720 4381440
+  STD     0     0     0     0     7     0     0     0    -8     0     0     0     1     0     0     0     0     0   6720 4388160
+  STD     0     0     0     0     7     0     0     0    -9     0     0     0     1     0     0     0     0     0   6720 4394880
+  STD     0     0     0     0     7     0     0     0   -10     0     0     0     1     0     0     0     0     0   6720 4401600
+  STD     0     0     0     0     7     0     0     0   -11     0     0     0     1     0     0     0     0     0   6720 4408320
+  STD     0     0     0     0     7     0     0     0   -12     0     0     0     1     0     0     0     0     0   6720 4415040
+  STD     0     0     0     0     7     0     0     0   -13     0     0     0     1     0     0     0     0     0   6720 4421760
+  STD     0     0     0     0     7     0     0     0   -14     0     0     0     1     0     0     0     0     0   6720 4428480
+  STD     0     0     0     0     7     0     0     0   -15     0     0     0     1     0     0     0     0     0   6720 4435200
+  STD     0     0     0     0     7     0     0     0   -16     0     0     0     1     0     0     0     0     0   6720 4441920
+  STD     0     0     0     0     7     0     0     0   -17     0     0     0     1     0     0     0     0     0   6720 4448640
+  STD     0     0     0     0     7     0     0     0   -18     0     0     0     1     0     0     0     0     0   6720 4455360
+  STD     0     0     0     0     7     0     0     0   -19     0     0     0     1     0     0     0     0     0   6720 4462080
+  STD     0     0     0     0     7     0     0     0   -20     0     0     0     1     0     0     0     0     0   6720 4468800
+  STD     0     0     0     0     7     0     0     0   -21     0     0     0     1     0     0     0     0     0   6720 4475520
+  STD     0     0     0     0     7     0     0     0   -22     0     0     0     1     0     0     0     0     0   6720 4482240
+  STD     0     0     0     0     7     0     0     0   -23     0     0     0     1     0     0     0     0     0   6720 4488960
+  STD     0     0     0     0     7     0     0     0   -24     0     0     0     1     0     0     0     0     0   6720 4495680
+  STD     0     0     0     0     7     0     0     0   -25     0     0     0     1     0     0     0     0     0   6720 4502400
+  STD     0     0     0     0     7     0     0     0   -26     0     0     0     1     0     0     0     0     0   6720 4509120
+  STD     0     0     0     0     7     0     0     0   -27     0     0     0     1     0     0     0     0     0   6720 4515840
+  STD     0     0     0     0     7     0     0     0   -28     0     0     0     1     0     0     0     0     0   6720 4522560
+  STD     0     0     0     0     7     0     0     0   -29     0     0     0     1     0     0     0     0     0   6720 4529280
+  STD     0     0     0     0     7     0     0     0   -30     0     0     0     1     0     0     0     0     0   6720 4536000
+  STD     0     0     0     0     7     0     0     0   -31     0     0     0     1     0     0     0     0     0   6720 4542720
+  STD     0     0     0     0     7     0     0     0   -32     0     0     0     1     0     0     0     0     0   6720 4549440
+  STD     0     0     0     0     7     0     0     0   -33     0     0     0     1     0     0     0     0     0   6720 4556160
+  STD     0     0     0     0     7     0     0     0   -34     0     0     0     1     0     0     0     0     0   6720 4562880
+  STD     0     0     0     0     7     0     0     0   -35     0     0     0     1     0     0     0     0     0   6720 4569600
+  STD     0     0     0     0     7     0     0     0   -36     0     0     0     1     0     0     0     0     0   6720 4576320
+  STD     0     0     0     0     7     0     0     0   -37     0     0     0     1     0     0     0     0     0   6720 4583040
+  STD     0     0     0     0     7     0     0     0   -38     0     0     0     1     0     0     0     0     0   6720 4589760
+  STD     0     0     0     0     7     0     0     0   -39     0     0     0     1     0     0     0     0     0   6720 4596480
+  STD     0     0     0     0     7     0     0     0   -40     0     0     0     1     0     0     0     0     0   6720 4603200
+  STD     0     0     0     0     7     0     0     0   -41     0     0     0     1     0     0     0     0     0   6720 4609920
+  STD     0     0     0     0     8     0     0     0    41     0     0     0     1     0     0     0     0     0   6720 4616640
+  STD     0     0     0     0     8     0     0     0    40     0     0     0     1     0     0     0     0     0   6720 4623360
+  STD     0     0     0     0     8     0     0     0    39     0     0     0     1     0     0     0     0     0   6720 4630080
+  STD     0     0     0     0     8     0     0     0    38     0     0     0     1     0     0     0     0     0   6720 4636800
+  STD     0     0     0     0     8     0     0     0    37     0     0     0     1     0     0     0     0     0   6720 4643520
+  STD     0     0     0     0     8     0     0     0    36     0     0     0     1     0     0     0     0     0   6720 4650240
+  STD     0     0     0     0     8     0     0     0    35     0     0     0     1     0     0     0     0     0   6720 4656960
+  STD     0     0     0     0     8     0     0     0    34     0     0     0     1     0     0     0     0     0   6720 4663680
+  STD     0     0     0     0     8     0     0     0    33     0     0     0     1     0     0     0     0     0   6720 4670400
+  STD     0     0     0     0     8     0     0     0    32     0     0     0     1     0     0     0     0     0   6720 4677120
+  STD     0     0     0     0     8     0     0     0    31     0     0     0     1     0     0     0     0     0   6720 4683840
+  STD     0     0     0     0     8     0     0     0    30     0     0     0     1     0     0     0     0     0   6720 4690560
+  STD     0     0     0     0     8     0     0     0    29     0     0     0     1     0     0     0     0     0   6720 4697280
+  STD     0     0     0     0     8     0     0     0    28     0     0     0     1     0     0     0     0     0   6720 4704000
+  STD     0     0     0     0     8     0     0     0    27     0     0     0     1     0     0     0     0     0   6720 4710720
+  STD     0     0     0     0     8     0     0     0    26     0     0     0     1     0     0     0     0     0   6720 4717440
+  STD     0     0     0     0     8     0     0     0    25     0     0     0     1     0     0     0     0     0   6720 4724160
+  STD     0     0     0     0     8     0     0     0    24     0     0     0     1     0     0     0     0     0   6720 4730880
+  STD     0     0     0     0     8     0     0     0    23     0     0     0     1     0     0     0     0     0   6720 4737600
+  STD     0     0     0     0     8     0     0     0    22     0     0     0     1     0     0     0     0     0   6720 4744320
+  STD     0     0     0     0     8     0     0     0    21     0     0     0     1     0     0     0     0     0   6720 4751040
+  STD     0     0     0     0     8     0     0     0    20     0     0     0     1     0     0     0     0     0   6720 4757760
+  STD     0     0     0     0     8     0     0     0    19     0     0     0     1     0     0     0     0     0   6720 4764480
+  STD     0     0     0     0     8     0     0     0    18     0     0     0     1     0     0     0     0     0   6720 4771200
+  STD     0     0     0     0     8     0     0     0    17     0     0     0     1     0     0     0     0     0   6720 4777920
+  STD     0     0     0     0     8     0     0     0    16     0     0     0     1     0     0     0     0     0   6720 4784640
+  STD     0     0     0     0     8     0     0     0    15     0     0     0     1     0     0     0     0     0   6720 4791360
+  STD     0     0     0     0     8     0     0     0    14     0     0     0     1     0     0     0     0     0   6720 4798080
+  STD     0     0     0     0     8     0     0     0    13     0     0     0     1     0     0     0     0     0   6720 4804800
+  STD     0     0     0     0     8     0     0     0    12     0     0     0     1     0     0     0     0     0   6720 4811520
+  STD     0     0     0     0     8     0     0     0    11     0     0     0     1     0     0     0     0     0   6720 4818240
+  STD     0     0     0     0     8     0     0     0    10     0     0     0     1     0     0     0     0     0   6720 4824960
+  STD     0     0     0     0     8     0     0     0     9     0     0     0     1     0     0     0     0     0   6720 4831680
+  STD     0     0     0     0     8     0     0     0     8     0     0     0     1     0     0     0     0     0   6720 4838400
+  STD     0     0     0     0     8     0     0     0     7     0     0     0     1     0     0     0     0     0   6720 4845120
+  STD     0     0     0     0     8     0     0     0     6     0     0     0     1     0     0     0     0     0   6720 4851840
+  STD     0     0     0     0     8     0     0     0     5     0     0     0     1     0     0     0     0     0   6720 4858560
+  STD     0     0     0     0     8     0     0     0     4     0     0     0     1     0     0     0     0     0   6720 4865280
+  STD     0     0     0     0     8     0     0     0     3     0     0     0     1     0     0     0     0     0   6720 4872000
+  STD     0     0     0     0     8     0     0     0     2     0     0     0     1     0     0     0     0     0   6720 4878720
+  STD     0     0     0     0     8     0     0     0     1     0     0     0     1     0     0     0     0     0   6720 4885440
+  STD     0     0     0     0     8     0     0     0     0     0     0     0     1     0     0     0     0     0   6720 4892160
+  STD     0     0     0     0     8     0     0     0    -1     0     0     0     1     0     0     0     0     0   6720 4898880
+  STD     0     0     0     0     8     0     0     0    -2     0     0     0     1     0     0     0     0     0   6720 4905600
+  STD     0     0     0     0     8     0     0     0    -3     0     0     0     1     0     0     0     0     0   6720 4912320
+  STD     0     0     0     0     8     0     0     0    -4     0     0     0     1     0     0     0     0     0   6720 4919040
+  STD     0     0     0     0     8     0     0     0    -5     0     0     0     1     0     0     0     0     0   6720 4925760
+  STD     0     0     0     0     8     0     0     0    -6     0     0     0     1     0     0     0     0     0   6720 4932480
+  STD     0     0     0     0     8     0     0     0    -7     0     0     0     1     0     0     0     0     0   6720 4939200
+  STD     0     0     0     0     8     0     0     0    -8     0     0     0     1     0     0     0     0     0   6720 4945920
+  STD     0     0     0     0     8     0     0     0    -9     0     0     0     1     0     0     0     0     0   6720 4952640
+  STD     0     0     0     0     8     0     0     0   -10     0     0     0     1     0     0     0     0     0   6720 4959360
+  STD     0     0     0     0     8     0     0     0   -11     0     0     0     1     0     0     0     0     0   6720 4966080
+  STD     0     0     0     0     8     0     0     0   -12     0     0     0     1     0     0     0     0     0   6720 4972800
+  STD     0     0     0     0     8     0     0     0   -13     0     0     0     1     0     0     0     0     0   6720 4979520
+  STD     0     0     0     0     8     0     0     0   -14     0     0     0     1     0     0     0     0     0   6720 4986240
+  STD     0     0     0     0     8     0     0     0   -15     0     0     0     1     0     0     0     0     0   6720 4992960
+  STD     0     0     0     0     8     0     0     0   -16     0     0     0     1     0     0     0     0     0   6720 4999680
+  STD     0     0     0     0     8     0     0     0   -17     0     0     0     1     0     0     0     0     0   6720 5006400
+  STD     0     0     0     0     8     0     0     0   -18     0     0     0     1     0     0     0     0     0   6720 5013120
+  STD     0     0     0     0     8     0     0     0   -19     0     0     0     1     0     0     0     0     0   6720 5019840
+  STD     0     0     0     0     8     0     0     0   -20     0     0     0     1     0     0     0     0     0   6720 5026560
+  STD     0     0     0     0     8     0     0     0   -21     0     0     0     1     0     0     0     0     0   6720 5033280
+  STD     0     0     0     0     8     0     0     0   -22     0     0     0     1     0     0     0     0     0   6720 5040000
+  STD     0     0     0     0     8     0     0     0   -23     0     0     0     1     0     0     0     0     0   6720 5046720
+  STD     0     0     0     0     8     0     0     0   -24     0     0     0     1     0     0     0     0     0   6720 5053440
+  STD     0     0     0     0     8     0     0     0   -25     0     0     0     1     0     0     0     0     0   6720 5060160
+  STD     0     0     0     0     8     0     0     0   -26     0     0     0     1     0     0     0     0     0   6720 5066880
+  STD     0     0     0     0     8     0     0     0   -27     0     0     0     1     0     0     0     0     0   6720 5073600
+  STD     0     0     0     0     8     0     0     0   -28     0     0     0     1     0     0     0     0     0   6720 5080320
+  STD     0     0     0     0     8     0     0     0   -29     0     0     0     1     0     0     0     0     0   6720 5087040
+  STD     0     0     0     0     8     0     0     0   -30     0     0     0     1     0     0     0     0     0   6720 5093760
+  STD     0     0     0     0     8     0     0     0   -31     0     0     0     1     0     0     0     0     0   6720 5100480
+  STD     0     0     0     0     8     0     0     0   -32     0     0     0     1     0     0     0     0     0   6720 5107200
+  STD     0     0     0     0     8     0     0     0   -33     0     0     0     1     0     0     0     0     0   6720 5113920
+  STD     0     0     0     0     8     0     0     0   -34     0     0     0     1     0     0     0     0     0   6720 5120640
+  STD     0     0     0     0     8     0     0     0   -35     0     0     0     1     0     0     0     0     0   6720 5127360
+  STD     0     0     0     0     8     0     0     0   -36     0     0     0     1     0     0     0     0     0   6720 5134080
+  STD     0     0     0     0     8     0     0     0   -37     0     0     0     1     0     0     0     0     0   6720 5140800
+  STD     0     0     0     0     8     0     0     0   -38     0     0     0     1     0     0     0     0     0   6720 5147520
+  STD     0     0     0     0     8     0     0     0   -39     0     0     0     1     0     0     0     0     0   6720 5154240
+  STD     0     0     0     0     8     0     0     0   -40     0     0     0     1     0     0     0     0     0   6720 5160960
+  STD     0     0     0     0     8     0     0     0   -41     0     0     0     1     0     0     0     0     0   6720 5167680
+  STD     0     0     0     0     9     0     0     0    41     0     0     0     1     0     0     0     0     0   6720 5174400
+  STD     0     0     0     0     9     0     0     0    40     0     0     0     1     0     0     0     0     0   6720 5181120
+  STD     0     0     0     0     9     0     0     0    39     0     0     0     1     0     0     0     0     0   6720 5187840
+  STD     0     0     0     0     9     0     0     0    38     0     0     0     1     0     0     0     0     0   6720 5194560
+  STD     0     0     0     0     9     0     0     0    37     0     0     0     1     0     0     0     0     0   6720 5201280
+  STD     0     0     0     0     9     0     0     0    36     0     0     0     1     0     0     0     0     0   6720 5208000
+  STD     0     0     0     0     9     0     0     0    35     0     0     0     1     0     0     0     0     0   6720 5214720
+  STD     0     0     0     0     9     0     0     0    34     0     0     0     1     0     0     0     0     0   6720 5221440
+  STD     0     0     0     0     9     0     0     0    33     0     0     0     1     0     0     0     0     0   6720 5228160
+  STD     0     0     0     0     9     0     0     0    32     0     0     0     1     0     0     0     0     0   6720 5234880
+  STD     0     0     0     0     9     0     0     0    31     0     0     0     1     0     0     0     0     0   6720 5241600
+  STD     0     0     0     0     9     0     0     0    30     0     0     0     1     0     0     0     0     0   6720 5248320
+  STD     0     0     0     0     9     0     0     0    29     0     0     0     1     0     0     0     0     0   6720 5255040
+  STD     0     0     0     0     9     0     0     0    28     0     0     0     1     0     0     0     0     0   6720 5261760
+  STD     0     0     0     0     9     0     0     0    27     0     0     0     1     0     0     0     0     0   6720 5268480
+  STD     0     0     0     0     9     0     0     0    26     0     0     0     1     0     0     0     0     0   6720 5275200
+  STD     0     0     0     0     9     0     0     0    25     0     0     0     1     0     0     0     0     0   6720 5281920
+  STD     0     0     0     0     9     0     0     0    24     0     0     0     1     0     0     0     0     0   6720 5288640
+  STD     0     0     0     0     9     0     0     0    23     0     0     0     1     0     0     0     0     0   6720 5295360
+  STD     0     0     0     0     9     0     0     0    22     0     0     0     1     0     0     0     0     0   6720 5302080
+  STD     0     0     0     0     9     0     0     0    21     0     0     0     1     0     0     0     0     0   6720 5308800
+  STD     0     0     0     0     9     0     0     0    20     0     0     0     1     0     0     0     0     0   6720 5315520
+  STD     0     0     0     0     9     0     0     0    19     0     0     0     1     0     0     0     0     0   6720 5322240
+  STD     0     0     0     0     9     0     0     0    18     0     0     0     1     0     0     0     0     0   6720 5328960
+  STD     0     0     0     0     9     0     0     0    17     0     0     0     1     0     0     0     0     0   6720 5335680
+  STD     0     0     0     0     9     0     0     0    16     0     0     0     1     0     0     0     0     0   6720 5342400
+  STD     0     0     0     0     9     0     0     0    15     0     0     0     1     0     0     0     0     0   6720 5349120
+  STD     0     0     0     0     9     0     0     0    14     0     0     0     1     0     0     0     0     0   6720 5355840
+  STD     0     0     0     0     9     0     0     0    13     0     0     0     1     0     0     0     0     0   6720 5362560
+  STD     0     0     0     0     9     0     0     0    12     0     0     0     1     0     0     0     0     0   6720 5369280
+  STD     0     0     0     0     9     0     0     0    11     0     0     0     1     0     0     0     0     0   6720 5376000
+  STD     0     0     0     0     9     0     0     0    10     0     0     0     1     0     0     0     0     0   6720 5382720
+  STD     0     0     0     0     9     0     0     0     9     0     0     0     1     0     0     0     0     0   6720 5389440
+  STD     0     0     0     0     9     0     0     0     8     0     0     0     1     0     0     0     0     0   6720 5396160
+  STD     0     0     0     0     9     0     0     0     7     0     0     0     1     0     0     0     0     0   6720 5402880
+  STD     0     0     0     0     9     0     0     0     6     0     0     0     1     0     0     0     0     0   6720 5409600
+  STD     0     0     0     0     9     0     0     0     5     0     0     0     1     0     0     0     0     0   6720 5416320
+  STD     0     0     0     0     9     0     0     0     4     0     0     0     1     0     0     0     0     0   6720 5423040
+  STD     0     0     0     0     9     0     0     0     3     0     0     0     1     0     0     0     0     0   6720 5429760
+  STD     0     0     0     0     9     0     0     0     2     0     0     0     1     0     0     0     0     0   6720 5436480
+  STD     0     0     0     0     9     0     0     0     1     0     0     0     1     0     0     0     0     0   6720 5443200
+  STD     0     0     0     0     9     0     0     0     0     0     0     0     1     0     0     0     0     0   6720 5449920
+  STD     0     0     0     0     9     0     0     0    -1     0     0     0     1     0     0     0     0     0   6720 5456640
+  STD     0     0     0     0     9     0     0     0    -2     0     0     0     1     0     0     0     0     0   6720 5463360
+  STD     0     0     0     0     9     0     0     0    -3     0     0     0     1     0     0     0     0     0   6720 5470080
+  STD     0     0     0     0     9     0     0     0    -4     0     0     0     1     0     0     0     0     0   6720 5476800
+  STD     0     0     0     0     9     0     0     0    -5     0     0     0     1     0     0     0     0     0   6720 5483520
+  STD     0     0     0     0     9     0     0     0    -6     0     0     0     1     0     0     0     0     0   6720 5490240
+  STD     0     0     0     0     9     0     0     0    -7     0     0     0     1     0     0     0     0     0   6720 5496960
+  STD     0     0     0     0     9     0     0     0    -8     0     0     0     1     0     0     0     0     0   6720 5503680
+  STD     0     0     0     0     9     0     0     0    -9     0     0     0     1     0     0     0     0     0   6720 5510400
+  STD     0     0     0     0     9     0     0     0   -10     0     0     0     1     0     0     0     0     0   6720 5517120
+  STD     0     0     0     0     9     0     0     0   -11     0     0     0     1     0     0     0     0     0   6720 5523840
+  STD     0     0     0     0     9     0     0     0   -12     0     0     0     1     0     0     0     0     0   6720 5530560
+  STD     0     0     0     0     9     0     0     0   -13     0     0     0     1     0     0     0     0     0   6720 5537280
+  STD     0     0     0     0     9     0     0     0   -14     0     0     0     1     0     0     0     0     0   6720 5544000
+  STD     0     0     0     0     9     0     0     0   -15     0     0     0     1     0     0     0     0     0   6720 5550720
+  STD     0     0     0     0     9     0     0     0   -16     0     0     0     1     0     0     0     0     0   6720 5557440
+  STD     0     0     0     0     9     0     0     0   -17     0     0     0     1     0     0     0     0     0   6720 5564160
+  STD     0     0     0     0     9     0     0     0   -18     0     0     0     1     0     0     0     0     0   6720 5570880
+  STD     0     0     0     0     9     0     0     0   -19     0     0     0     1     0     0     0     0     0   6720 5577600
+  STD     0     0     0     0     9     0     0     0   -20     0     0     0     1     0     0     0     0     0   6720 5584320
+  STD     0     0     0     0     9     0     0     0   -21     0     0     0     1     0     0     0     0     0   6720 5591040
+  STD     0     0     0     0     9     0     0     0   -22     0     0     0     1     0     0     0     0     0   6720 5597760
+  STD     0     0     0     0     9     0     0     0   -23     0     0     0     1     0     0     0     0     0   6720 5604480
+  STD     0     0     0     0     9     0     0     0   -24     0     0     0     1     0     0     0     0     0   6720 5611200
+  STD     0     0     0     0     9     0     0     0   -25     0     0     0     1     0     0     0     0     0   6720 5617920
+  STD     0     0     0     0     9     0     0     0   -26     0     0     0     1     0     0     0     0     0   6720 5624640
+  STD     0     0     0     0     9     0     0     0   -27     0     0     0     1     0     0     0     0     0   6720 5631360
+  STD     0     0     0     0     9     0     0     0   -28     0     0     0     1     0     0     0     0     0   6720 5638080
+  STD     0     0     0     0     9     0     0     0   -29     0     0     0     1     0     0     0     0     0   6720 5644800
+  STD     0     0     0     0     9     0     0     0   -30     0     0     0     1     0     0     0     0     0   6720 5651520
+  STD     0     0     0     0     9     0     0     0   -31     0     0     0     1     0     0     0     0     0   6720 5658240
+  STD     0     0     0     0     9     0     0     0   -32     0     0     0     1     0     0     0     0     0   6720 5664960
+  STD     0     0     0     0     9     0     0     0   -33     0     0     0     1     0     0     0     0     0   6720 5671680
+  STD     0     0     0     0     9     0     0     0   -34     0     0     0     1     0     0     0     0     0   6720 5678400
+  STD     0     0     0     0     9     0     0     0   -35     0     0     0     1     0     0     0     0     0   6720 5685120
+  STD     0     0     0     0     9     0     0     0   -36     0     0     0     1     0     0     0     0     0   6720 5691840
+  STD     0     0     0     0     9     0     0     0   -37     0     0     0     1     0     0     0     0     0   6720 5698560
+  STD     0     0     0     0     9     0     0     0   -38     0     0     0     1     0     0     0     0     0   6720 5705280
+  STD     0     0     0     0     9     0     0     0   -39     0     0     0     1     0     0     0     0     0   6720 5712000
+  STD     0     0     0     0     9     0     0     0   -40     0     0     0     1     0     0     0     0     0   6720 5718720
+  STD     0     0     0     0     9     0     0     0   -41     0     0     0     1     0     0     0     0     0   6720 5725440
+  STD     0     0     0     0    10     0     0     0    41     0     0     0     1     0     0     0     0     0   6720 5732160
+  STD     0     0     0     0    10     0     0     0    40     0     0     0     1     0     0     0     0     0   6720 5738880
+  STD     0     0     0     0    10     0     0     0    39     0     0     0     1     0     0     0     0     0   6720 5745600
+  STD     0     0     0     0    10     0     0     0    38     0     0     0     1     0     0     0     0     0   6720 5752320
+  STD     0     0     0     0    10     0     0     0    37     0     0     0     1     0     0     0     0     0   6720 5759040
+  STD     0     0     0     0    10     0     0     0    36     0     0     0     1     0     0     0     0     0   6720 5765760
+  STD     0     0     0     0    10     0     0     0    35     0     0     0     1     0     0     0     0     0   6720 5772480
+  STD     0     0     0     0    10     0     0     0    34     0     0     0     1     0     0     0     0     0   6720 5779200
+  STD     0     0     0     0    10     0     0     0    33     0     0     0     1     0     0     0     0     0   6720 5785920
+  STD     0     0     0     0    10     0     0     0    32     0     0     0     1     0     0     0     0     0   6720 5792640
+  STD     0     0     0     0    10     0     0     0    31     0     0     0     1     0     0     0     0     0   6720 5799360
+  STD     0     0     0     0    10     0     0     0    30     0     0     0     1     0     0     0     0     0   6720 5806080
+  STD     0     0     0     0    10     0     0     0    29     0     0     0     1     0     0     0     0     0   6720 5812800
+  STD     0     0     0     0    10     0     0     0    28     0     0     0     1     0     0     0     0     0   6720 5819520
+  STD     0     0     0     0    10     0     0     0    27     0     0     0     1     0     0     0     0     0   6720 5826240
+  STD     0     0     0     0    10     0     0     0    26     0     0     0     1     0     0     0     0     0   6720 5832960
+  STD     0     0     0     0    10     0     0     0    25     0     0     0     1     0     0     0     0     0   6720 5839680
+  STD     0     0     0     0    10     0     0     0    24     0     0     0     1     0     0     0     0     0   6720 5846400
+  STD     0     0     0     0    10     0     0     0    23     0     0     0     1     0     0     0     0     0   6720 5853120
+  STD     0     0     0     0    10     0     0     0    22     0     0     0     1     0     0     0     0     0   6720 5859840
+  STD     0     0     0     0    10     0     0     0    21     0     0     0     1     0     0     0     0     0   6720 5866560
+  STD     0     0     0     0    10     0     0     0    20     0     0     0     1     0     0     0     0     0   6720 5873280
+  STD     0     0     0     0    10     0     0     0    19     0     0     0     1     0     0     0     0     0   6720 5880000
+  STD     0     0     0     0    10     0     0     0    18     0     0     0     1     0     0     0     0     0   6720 5886720
+  STD     0     0     0     0    10     0     0     0    17     0     0     0     1     0     0     0     0     0   6720 5893440
+  STD     0     0     0     0    10     0     0     0    16     0     0     0     1     0     0     0     0     0   6720 5900160
+  STD     0     0     0     0    10     0     0     0    15     0     0     0     1     0     0     0     0     0   6720 5906880
+  STD     0     0     0     0    10     0     0     0    14     0     0     0     1     0     0     0     0     0   6720 5913600
+  STD     0     0     0     0    10     0     0     0    13     0     0     0     1     0     0     0     0     0   6720 5920320
+  STD     0     0     0     0    10     0     0     0    12     0     0     0     1     0     0     0     0     0   6720 5927040
+  STD     0     0     0     0    10     0     0     0    11     0     0     0     1     0     0     0     0     0   6720 5933760
+  STD     0     0     0     0    10     0     0     0    10     0     0     0     1     0     0     0     0     0   6720 5940480
+  STD     0     0     0     0    10     0     0     0     9     0     0     0     1     0     0     0     0     0   6720 5947200
+  STD     0     0     0     0    10     0     0     0     8     0     0     0     1     0     0     0     0     0   6720 5953920
+  STD     0     0     0     0    10     0     0     0     7     0     0     0     1     0     0     0     0     0   6720 5960640
+  STD     0     0     0     0    10     0     0     0     6     0     0     0     1     0     0     0     0     0   6720 5967360
+  STD     0     0     0     0    10     0     0     0     5     0     0     0     1     0     0     0     0     0   6720 5974080
+  STD     0     0     0     0    10     0     0     0     4     0     0     0     1     0     0     0     0     0   6720 5980800
+  STD     0     0     0     0    10     0     0     0     3     0     0     0     1     0     0     0     0     0   6720 5987520
+  STD     0     0     0     0    10     0     0     0     2     0     0     0     1     0     0     0     0     0   6720 5994240
+  STD     0     0     0     0    10     0     0     0     1     0     0     0     1     0     0     0     0     0   6720 6000960
+  STD     0     0     0     0    10     0     0     0     0     0     0     0     1     0     0     0     0     0   6720 6007680
+  STD     0     0     0     0    10     0     0     0    -1     0     0     0     1     0     0     0     0     0   6720 6014400
+  STD     0     0     0     0    10     0     0     0    -2     0     0     0     1     0     0     0     0     0   6720 6021120
+  STD     0     0     0     0    10     0     0     0    -3     0     0     0     1     0     0     0     0     0   6720 6027840
+  STD     0     0     0     0    10     0     0     0    -4     0     0     0     1     0     0     0     0     0   6720 6034560
+  STD     0     0     0     0    10     0     0     0    -5     0     0     0     1     0     0     0     0     0   6720 6041280
+  STD     0     0     0     0    10     0     0     0    -6     0     0     0     1     0     0     0     0     0   6720 6048000
+  STD     0     0     0     0    10     0     0     0    -7     0     0     0     1     0     0     0     0     0   6720 6054720
+  STD     0     0     0     0    10     0     0     0    -8     0     0     0     1     0     0     0     0     0   6720 6061440
+  STD     0     0     0     0    10     0     0     0    -9     0     0     0     1     0     0     0     0     0   6720 6068160
+  STD     0     0     0     0    10     0     0     0   -10     0     0     0     1     0     0     0     0     0   6720 6074880
+  STD     0     0     0     0    10     0     0     0   -11     0     0     0     1     0     0     0     0     0   6720 6081600
+  STD     0     0     0     0    10     0     0     0   -12     0     0     0     1     0     0     0     0     0   6720 6088320
+  STD     0     0     0     0    10     0     0     0   -13     0     0     0     1     0     0     0     0     0   6720 6095040
+  STD     0     0     0     0    10     0     0     0   -14     0     0     0     1     0     0     0     0     0   6720 6101760
+  STD     0     0     0     0    10     0     0     0   -15     0     0     0     1     0     0     0     0     0   6720 6108480
+  STD     0     0     0     0    10     0     0     0   -16     0     0     0     1     0     0     0     0     0   6720 6115200
+  STD     0     0     0     0    10     0     0     0   -17     0     0     0     1     0     0     0     0     0   6720 6121920
+  STD     0     0     0     0    10     0     0     0   -18     0     0     0     1     0     0     0     0     0   6720 6128640
+  STD     0     0     0     0    10     0     0     0   -19     0     0     0     1     0     0     0     0     0   6720 6135360
+  STD     0     0     0     0    10     0     0     0   -20     0     0     0     1     0     0     0     0     0   6720 6142080
+  STD     0     0     0     0    10     0     0     0   -21     0     0     0     1     0     0     0     0     0   6720 6148800
+  STD     0     0     0     0    10     0     0     0   -22     0     0     0     1     0     0     0     0     0   6720 6155520
+  STD     0     0     0     0    10     0     0     0   -23     0     0     0     1     0     0     0     0     0   6720 6162240
+  STD     0     0     0     0    10     0     0     0   -24     0     0     0     1     0     0     0     0     0   6720 6168960
+  STD     0     0     0     0    10     0     0     0   -25     0     0     0     1     0     0     0     0     0   6720 6175680
+  STD     0     0     0     0    10     0     0     0   -26     0     0     0     1     0     0     0     0     0   6720 6182400
+  STD     0     0     0     0    10     0     0     0   -27     0     0     0     1     0     0     0     0     0   6720 6189120
+  STD     0     0     0     0    10     0     0     0   -28     0     0     0     1     0     0     0     0     0   6720 6195840
+  STD     0     0     0     0    10     0     0     0   -29     0     0     0     1     0     0     0     0     0   6720 6202560
+  STD     0     0     0     0    10     0     0     0   -30     0     0     0     1     0     0     0     0     0   6720 6209280
+  STD     0     0     0     0    10     0     0     0   -31     0     0     0     1     0     0     0     0     0   6720 6216000
+  STD     0     0     0     0    10     0     0     0   -32     0     0     0     1     0     0     0     0     0   6720 6222720
+  STD     0     0     0     0    10     0     0     0   -33     0     0     0     1     0     0     0     0     0   6720 6229440
+  STD     0     0     0     0    10     0     0     0   -34     0     0     0     1     0     0     0     0     0   6720 6236160
+  STD     0     0     0     0    10     0     0     0   -35     0     0     0     1     0     0     0     0     0   6720 6242880
+  STD     0     0     0     0    10     0     0     0   -36     0     0     0     1     0     0     0     0     0   6720 6249600
+  STD     0     0     0     0    10     0     0     0   -37     0     0     0     1     0     0     0     0     0   6720 6256320
+  STD     0     0     0     0    10     0     0     0   -38     0     0     0     1     0     0     0     0     0   6720 6263040
+  STD     0     0     0     0    10     0     0     0   -39     0     0     0     1     0     0     0     0     0   6720 6269760
+  STD     0     0     0     0    10     0     0     0   -40     0     0     0     1     0     0     0     0     0   6720 6276480
+  STD     0     0     0     0    10     0     0     0   -41     0     0     0     1     0     0     0     0     0   6720 6283200
+  STD     0     0     0     0    11     0     0     0    41     0     0     0     1     0     0     0     0     0   6720 6289920
+  STD     0     0     0     0    11     0     0     0    40     0     0     0     1     0     0     0     0     0   6720 6296640
+  STD     0     0     0     0    11     0     0     0    39     0     0     0     1     0     0     0     0     0   6720 6303360
+  STD     0     0     0     0    11     0     0     0    38     0     0     0     1     0     0     0     0     0   6720 6310080
+  STD     0     0     0     0    11     0     0     0    37     0     0     0     1     0     0     0     0     0   6720 6316800
+  STD     0     0     0     0    11     0     0     0    36     0     0     0     1     0     0     0     0     0   6720 6323520
+  STD     0     0     0     0    11     0     0     0    35     0     0     0     1     0     0     0     0     0   6720 6330240
+  STD     0     0     0     0    11     0     0     0    34     0     0     0     1     0     0     0     0     0   6720 6336960
+  STD     0     0     0     0    11     0     0     0    33     0     0     0     1     0     0     0     0     0   6720 6343680
+  STD     0     0     0     0    11     0     0     0    32     0     0     0     1     0     0     0     0     0   6720 6350400
+  STD     0     0     0     0    11     0     0     0    31     0     0     0     1     0     0     0     0     0   6720 6357120
+  STD     0     0     0     0    11     0     0     0    30     0     0     0     1     0     0     0     0     0   6720 6363840
+  STD     0     0     0     0    11     0     0     0    29     0     0     0     1     0     0     0     0     0   6720 6370560
+  STD     0     0     0     0    11     0     0     0    28     0     0     0     1     0     0     0     0     0   6720 6377280
+  STD     0     0     0     0    11     0     0     0    27     0     0     0     1     0     0     0     0     0   6720 6384000
+  STD     0     0     0     0    11     0     0     0    26     0     0     0     1     0     0     0     0     0   6720 6390720
+  STD     0     0     0     0    11     0     0     0    25     0     0     0     1     0     0     0     0     0   6720 6397440
+  STD     0     0     0     0    11     0     0     0    24     0     0     0     1     0     0     0     0     0   6720 6404160
+  STD     0     0     0     0    11     0     0     0    23     0     0     0     1     0     0     0     0     0   6720 6410880
+  STD     0     0     0     0    11     0     0     0    22     0     0     0     1     0     0     0     0     0   6720 6417600
+  STD     0     0     0     0    11     0     0     0    21     0     0     0     1     0     0     0     0     0   6720 6424320
+  STD     0     0     0     0    11     0     0     0    20     0     0     0     1     0     0     0     0     0   6720 6431040
+  STD     0     0     0     0    11     0     0     0    19     0     0     0     1     0     0     0     0     0   6720 6437760
+  STD     0     0     0     0    11     0     0     0    18     0     0     0     1     0     0     0     0     0   6720 6444480
+  STD     0     0     0     0    11     0     0     0    17     0     0     0     1     0     0     0     0     0   6720 6451200
+  STD     0     0     0     0    11     0     0     0    16     0     0     0     1     0     0     0     0     0   6720 6457920
+  STD     0     0     0     0    11     0     0     0    15     0     0     0     1     0     0     0     0     0   6720 6464640
+  STD     0     0     0     0    11     0     0     0    14     0     0     0     1     0     0     0     0     0   6720 6471360
+  STD     0     0     0     0    11     0     0     0    13     0     0     0     1     0     0     0     0     0   6720 6478080
+  STD     0     0     0     0    11     0     0     0    12     0     0     0     1     0     0     0     0     0   6720 6484800
+  STD     0     0     0     0    11     0     0     0    11     0     0     0     1     0     0     0     0     0   6720 6491520
+  STD     0     0     0     0    11     0     0     0    10     0     0     0     1     0     0     0     0     0   6720 6498240
+  STD     0     0     0     0    11     0     0     0     9     0     0     0     1     0     0     0     0     0   6720 6504960
+  STD     0     0     0     0    11     0     0     0     8     0     0     0     1     0     0     0     0     0   6720 6511680
+  STD     0     0     0     0    11     0     0     0     7     0     0     0     1     0     0     0     0     0   6720 6518400
+  STD     0     0     0     0    11     0     0     0     6     0     0     0     1     0     0     0     0     0   6720 6525120
+  STD     0     0     0     0    11     0     0     0     5     0     0     0     1     0     0     0     0     0   6720 6531840
+  STD     0     0     0     0    11     0     0     0     4     0     0     0     1     0     0     0     0     0   6720 6538560
+  STD     0     0     0     0    11     0     0     0     3     0     0     0     1     0     0     0     0     0   6720 6545280
+  STD     0     0     0     0    11     0     0     0     2     0     0     0     1     0     0     0     0     0   6720 6552000
+  STD     0     0     0     0    11     0     0     0     1     0     0     0     1     0     0     0     0     0   6720 6558720
+  STD     0     0     0     0    11     0     0     0     0     0     0     0     1     0     0     0     0     0   6720 6565440
+  STD     0     0     0     0    11     0     0     0    -1     0     0     0     1     0     0     0     0     0   6720 6572160
+  STD     0     0     0     0    11     0     0     0    -2     0     0     0     1     0     0     0     0     0   6720 6578880
+  STD     0     0     0     0    11     0     0     0    -3     0     0     0     1     0     0     0     0     0   6720 6585600
+  STD     0     0     0     0    11     0     0     0    -4     0     0     0     1     0     0     0     0     0   6720 6592320
+  STD     0     0     0     0    11     0     0     0    -5     0     0     0     1     0     0     0     0     0   6720 6599040
+  STD     0     0     0     0    11     0     0     0    -6     0     0     0     1     0     0     0     0     0   6720 6605760
+  STD     0     0     0     0    11     0     0     0    -7     0     0     0     1     0     0     0     0     0   6720 6612480
+  STD     0     0     0     0    11     0     0     0    -8     0     0     0     1     0     0     0     0     0   6720 6619200
+  STD     0     0     0     0    11     0     0     0    -9     0     0     0     1     0     0     0     0     0   6720 6625920
+  STD     0     0     0     0    11     0     0     0   -10     0     0     0     1     0     0     0     0     0   6720 6632640
+  STD     0     0     0     0    11     0     0     0   -11     0     0     0     1     0     0     0     0     0   6720 6639360
+  STD     0     0     0     0    11     0     0     0   -12     0     0     0     1     0     0     0     0     0   6720 6646080
+  STD     0     0     0     0    11     0     0     0   -13     0     0     0     1     0     0     0     0     0   6720 6652800
+  STD     0     0     0     0    11     0     0     0   -14     0     0     0     1     0     0     0     0     0   6720 6659520
+  STD     0     0     0     0    11     0     0     0   -15     0     0     0     1     0     0     0     0     0   6720 6666240
+  STD     0     0     0     0    11     0     0     0   -16     0     0     0     1     0     0     0     0     0   6720 6672960
+  STD     0     0     0     0    11     0     0     0   -17     0     0     0     1     0     0     0     0     0   6720 6679680
+  STD     0     0     0     0    11     0     0     0   -18     0     0     0     1     0     0     0     0     0   6720 6686400
+  STD     0     0     0     0    11     0     0     0   -19     0     0     0     1     0     0     0     0     0   6720 6693120
+  STD     0     0     0     0    11     0     0     0   -20     0     0     0     1     0     0     0     0     0   6720 6699840
+  STD     0     0     0     0    11     0     0     0   -21     0     0     0     1     0     0     0     0     0   6720 6706560
+  STD     0     0     0     0    11     0     0     0   -22     0     0     0     1     0     0     0     0     0   6720 6713280
+  STD     0     0     0     0    11     0     0     0   -23     0     0     0     1     0     0     0     0     0   6720 6720000
+  STD     0     0     0     0    11     0     0     0   -24     0     0     0     1     0     0     0     0     0   6720 6726720
+  STD     0     0     0     0    11     0     0     0   -25     0     0     0     1     0     0     0     0     0   6720 6733440
+  STD     0     0     0     0    11     0     0     0   -26     0     0     0     1     0     0     0     0     0   6720 6740160
+  STD     0     0     0     0    11     0     0     0   -27     0     0     0     1     0     0     0     0     0   6720 6746880
+  STD     0     0     0     0    11     0     0     0   -28     0     0     0     1     0     0     0     0     0   6720 6753600
+  STD     0     0     0     0    11     0     0     0   -29     0     0     0     1     0     0     0     0     0   6720 6760320
+  STD     0     0     0     0    11     0     0     0   -30     0     0     0     1     0     0     0     0     0   6720 6767040
+  STD     0     0     0     0    11     0     0     0   -31     0     0     0     1     0     0     0     0     0   6720 6773760
+  STD     0     0     0     0    11     0     0     0   -32     0     0     0     1     0     0     0     0     0   6720 6780480
+  STD     0     0     0     0    11     0     0     0   -33     0     0     0     1     0     0     0     0     0   6720 6787200
+  STD     0     0     0     0    11     0     0     0   -34     0     0     0     1     0     0     0     0     0   6720 6793920
+  STD     0     0     0     0    11     0     0     0   -35     0     0     0     1     0     0     0     0     0   6720 6800640
+  STD     0     0     0     0    11     0     0     0   -36     0     0     0     1     0     0     0     0     0   6720 6807360
+  STD     0     0     0     0    11     0     0     0   -37     0     0     0     1     0     0     0     0     0   6720 6814080
+  STD     0     0     0     0    11     0     0     0   -38     0     0     0     1     0     0     0     0     0   6720 6820800
+  STD     0     0     0     0    11     0     0     0   -39     0     0     0     1     0     0     0     0     0   6720 6827520
+  STD     0     0     0     0    11     0     0     0   -40     0     0     0     1     0     0     0     0     0   6720 6834240
+  STD     0     0     0     0    11     0     0     0   -41     0     0     0     1     0     0     0     0     0   6720 6840960
+#
+# === END OF DATA VECTOR INDEX ===================================================
+#
+# === END OF DATA DESCRIPTION FILE ===============================================

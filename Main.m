@@ -72,4 +72,4 @@ nii.img = rot90(flipud(nii.img),-1);
 
 temp_hdr = nii_tool('hdr',[parentPath, parentFile]);
 nii.hdr = temp_hdr;
-nii_tool('save',nii,[path,'img_ventilation_reconstruction_v4.nii.gz'])
+nii_tool('save',nii,[path,'img_ventilation_reconstruction_v6.nii.gz'])

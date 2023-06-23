@@ -108,6 +108,7 @@ function [Image, parentPath, FileNames] = LoadData_ListData_R590(DataLocation,Fo
                     %Image(:,:,sl) = imresize(img(:,:,sl),recon_sz([1,2]));
                     Image(:,:,sl) = padarray(img(:,:,sl),[(recon_sz(1)-Fourier_sz(1))/2,0,0],0,'both');
 %                     Image(:,:,sl) = diffimg(:,:,sl) ;
+                    Image = real(Image);
             end
             
     end

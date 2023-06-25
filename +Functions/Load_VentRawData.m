@@ -35,9 +35,9 @@ elseif strcmp(MainInput.XeDataext,'.nii') == 1 || strcmp(MainInput.XeDataext,'.g
             gzfile_coronal = [3 1 2];
             A=permute(A,gzfile_coronal);
             A=rot90(A,2); 
-        else
-            A=imrotate(A,90);
-            A=flip(A,2);
+%         else
+%             A=imrotate(A,90);
+%             A=flip(A,2);
         end  
         A = double(squeeze(A));                     
         Ventilation.Image = A;
@@ -48,6 +48,11 @@ elseif strcmp(MainInput.XeDataext,'.data') == 1
                
         [Image, file_folder, file_name] = ...
             Functions.LoadData_ListData_R590(MainInput.XeDataLocation,MainInput.Fourier_sz,MainInput.recon_sz);
+        if contains(MainInput.ImgOrientation,"ax",IgnoreCase=true)
+            Image = rot90(Image);
+        elseif contains(MainInput.ImgOrientation,'cor','IgnoreCase',true)
+            Image = rot90(Image,2);
+        end
         Ventilation.Image = Image;
         Ventilation.filename = file_name;
         Ventilation.folder = file_folder;          

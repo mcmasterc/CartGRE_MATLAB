@@ -46,12 +46,12 @@ MainInput.XeDataext = xe_ext;
 % subject. 
 %
 
-%ImgOrientation = 'Coronal'; % just choose coronal or axial by commenting/uncommenting
-ImgOrientation = 'Coronal';
+% ImgOrientation = 'Coronal'; % just choose coronal or axial by commenting/uncommenting
+ImgOrientation = 'Axial';
 
-subject_id = '20230306_IRC740H-046c';
-Fourier_sz = [144,144,12];
-recon_sz = [144,144,12];
+subject_id = '20230411_IRC186H-489';
+Fourier_sz = [112,112,23];
+recon_sz = [112,112,23];
 
 MainInput.ImgOrientation = ImgOrientation;
 MainInput.subject_id = subject_id;

@@ -104,7 +104,6 @@ function [Image, parentPath, FileNames] = LoadData_ListData_R590(DataLocation,Fo
                     recon_slice = recon_slice(:,x_ind1:x_ind2); % crop extra pixels from oversample factor 
                     imgcmplx(:,:,sl) = recon_slice;
                     img(:,:,sl) = abs(imgcmplx(:,:,sl)); % make magnitude data
-                    img = rot90(img,2);
                     %Image(:,:,sl) = imresize(img(:,:,sl),recon_sz([1,2]));
                     Image(:,:,sl) = padarray(img(:,:,sl),[(recon_sz(1)-Fourier_sz(1))/2,0,0],0,'both');
 %                     Image(:,:,sl) = diffimg(:,:,sl) ;
